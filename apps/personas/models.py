@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Persona(models):
+class Persona(models.Model):
 
     nombre = models.CharField(max_length=3000, blank=False, null=False)
     apellido = models.CharField(max_length=3000, blank=False, null=False)
