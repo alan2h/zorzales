@@ -9,4 +9,4 @@ class Ingreso(TemplateView):
 
 class Dashboard(TemplateView):
 
-    template_name = 'base.html'
+    template_name = 'dashboard.html'
