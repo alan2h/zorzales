@@ -31,13 +31,14 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form>
+            <form method="POST">
+              {% csrf_token %}
               <h1>Ingresar al Sistema</h1>
               <div>
-                <input type="text" class="form-control" placeholder="Nombre de usuario" required="" />
+                <input type="text" name="username" class="form-control" placeholder="Nombre de usuario" required="" />
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Contraseña" required="" />
+                <input type="password" name="password" class="form-control" placeholder="Contraseña" required="" />
               </div>
               <div>
                 <button type="submit"  class="btn btn-success" href="">Ingresar</button>
