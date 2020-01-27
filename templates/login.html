@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
@@ -31,17 +32,17 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form method="POST">
+            <form method="POST" action="">
               {% csrf_token %}
               <h1>Ingresar al Sistema</h1>
               <div>
-                <input type="text" name="username" class="form-control" placeholder="Nombre de usuario" required="" />
+                <input type="text" name="username" class="form-control" placeholder="Nombre de usuario" required />
               </div>
               <div>
-                <input type="password" name="password" class="form-control" placeholder="Contraseña" required="" />
+                <input type="password" name="password" class="form-control" placeholder="Contraseña" required />
               </div>
               <div>
-                <button type="submit"  class="btn btn-success" href="">Ingresar</button>
+                <button type="submit"  class="btn btn-success" >Ingresar</button>
               </div>
 
               <div class="clearfix"></div>
