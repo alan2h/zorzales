@@ -41,7 +41,7 @@
               </div>
               <div class="profile_info">
                 <span>Bienvenido,</span>
-                <h2>Username</h2>
+                <h2>{{ user.get_username }}</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -89,7 +89,7 @@
                 <ul class=" navbar-right">
                   <li class="nav-item dropdown open" style="padding-left: 15px;">
                     <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                      <img src="#" alt="">Username
+                      <img src="#" alt="">{{ user.get_username }}
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item"  href="javascript:;"> Perfil</a>
@@ -98,7 +98,7 @@
                           <span>Settings</span>
                         </a>
                     <a class="dropdown-item"  href="javascript:;">Help</a>
-                      <a class="dropdown-item"  href="login.html"><i class="fa fa-sign-out pull-right"></i> Salir</a>
+                      <a class="dropdown-item"  href="/salir"><i class="fa fa-sign-out pull-right"></i> Salir</a>
                     </div>
                   </li>
   
@@ -201,7 +201,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            Sistema de Gestión Administrativa <a href="#">Alan Beck - Luis Ojeda</a>
           </div>
           <div class="clearfix"></div>
         </footer>

@@ -7,7 +7,6 @@ class Persona(models.Model):
     apellido = models.CharField(max_length=3000, blank=False, null=False)
     fecha_nacimiento = models.DateField(blank=True, null=True)
 
-
     def __str__(self):
 
         return '%s, %s' % (self.apellido, self.nombre)

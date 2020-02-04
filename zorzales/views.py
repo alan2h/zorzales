@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 
 # libs login
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 
 
 class Ingreso(TemplateView):
@@ -28,3 +28,9 @@ class Ingreso(TemplateView):
 class Dashboard(TemplateView):
 
     template_name = 'dashboard.html'
+
+
+def salir(request):
+
+    logout(request)
+    return redirect('')
