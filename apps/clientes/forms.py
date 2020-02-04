@@ -27,8 +27,14 @@ class ClienteForm(forms.ModelForm):
     fecha_nacimiento = forms.DateField(required=False, widget=forms.DateInput(
         attrs={'class': 'form-control'}
     ))
+    email = forms.CharField(required=True, max_length=300, widget=forms.TextInput(
+        attrs={'class': 'form-control'}
+        ))
+    telefono = forms.CharField(required=True, max_length=300, widget=forms.TextInput(
+        attrs={'class': 'form-control'}
+        ))
     
     class Meta:
         model = Cliente
-        fields = ['nombre', 'apellido', 'fecha_nacimiento']
+        fields = ['nombre', 'apellido', 'fecha_nacimiento', 'email', 'telefono']
     

@@ -6,6 +6,8 @@ from apps.personas.models import Persona
 class Cliente(Persona):
 
     foto = models.ImageField(upload_to='clientes', blank=True, null=True)
+    email = models.CharField(max_length=300, blank=True, null=True)
+    telefono = models.CharField(max_length=300, blank=True, null=True)
     baja = models.BooleanField(default=False)
     fecha_baja = models.DateField(blank=True, null=True)
     motivo = models.CharField(max_length=600, blank=True, null=True)
