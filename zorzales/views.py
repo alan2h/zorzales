@@ -6,10 +6,19 @@ from django.views.generic import TemplateView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 
+# libs security
+from apps.lib.security.login_required import LoginRequired
+
 
 class Ingreso(TemplateView):
 
     template_name = 'login.html'
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated: # si esta autenticado mandarle al sistema
+            return redirect('/inicio')
+        form = AuthenticationForm()
+        return render(request, self.template_name, {'form': form})
 
 
     def post(self, request, *args, **kwargs):
@@ -22,10 +31,10 @@ class Ingreso(TemplateView):
                 login(request, user)
                 return redirect('/inicio')
 
-        return render(request, 'login.html', {'form': form})
+        return render(request, self.template_name, {'form': form})
 
 
-class Dashboard(TemplateView):
+class Dashboard(LoginRequired, TemplateView):
 
     template_name = 'dashboard.html'
 
@@ -33,4 +42,4 @@ class Dashboard(TemplateView):
 def salir(request):
 
     logout(request)
-    return redirect('')
+    return redirect('/')
