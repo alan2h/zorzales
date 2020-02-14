@@ -22,19 +22,26 @@
 
     <!-- Custom Theme Style -->
     <link href="{% static '/assets/build/css/custom.min.css' %}" rel="stylesheet">
+
+    <style>
+      </style> 
   </head>
 
   <body class="login" >
     <div>
       <a class="hiddenanchor" id="signup"></a>
       <a class="hiddenanchor" id="signin"></a>
+      
 
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
             <form method="POST" action="">
               {% csrf_token %}
-              <h1>Ingresar al Sistema</h1>
+              <div class="text-center">
+                <img src="/media/logos/logo.png" height="182" width="182" class="rounded" alt="...">
+              </div> 
+              <br>             
               {{ form.errors }}
               <div>
                 <input type="text" name="username" class="form-control" placeholder="Nombre de usuario" required />
@@ -43,7 +50,8 @@
                 <input type="password" name="password" class="form-control" placeholder="Contraseña" required />
               </div>
               <div>
-                <button type="submit"  class="btn btn-success" >Ingresar</button>
+                <button type="submit"  class="btn btn-success" >Ingresar al sistema</button>
+                <button onclick="ingresar_administracion()" type="button"  class="btn btn-info" > Administración</button> 
               </div>
 
               <div class="clearfix"></div>
@@ -64,4 +72,9 @@
       </div>
     </div>
   </body>
+  <script>
+    function ingresar_administracion(){
+      location.href = '/admin/'
+    }
+  </script>
 </html>
