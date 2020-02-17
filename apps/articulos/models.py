@@ -28,5 +28,3 @@ class Articulo(models.Model):
     class Meta:
         verbose_name = 'Artículos'
         verbose_name_plural = 'Artículos'
-
-

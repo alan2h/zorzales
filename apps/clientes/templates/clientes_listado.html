@@ -42,17 +42,20 @@
               </tr>
             </thead>
             <tbody>
+              
+              {% for cliente in object_list %}
+
               <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
+                <th scope="row">{{ cliente.id  }}</th>
+                <td>{{ cliente.nombre }}</td>
+                <td>{{ cliente.apellido }}</td>
+                <td>{{ cliente.fecha_nacimiento }}</td>
+                <td>{% if cliente.email %}{{ cliente.email }}{% else %} -- {% endif %}</td>
+                <td>{% if cliente.telefono %}{{ cliente.telefono }}{% else %} -- {% endif %}</td>
                 <td><button type="button" class="btn btn-success"><i class="fa fa-pencil"></i></button></td>
                 <td><button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
               </tr>
-            
+              {% endfor %}
             </tbody>
           </table>
 

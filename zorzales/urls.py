@@ -27,5 +27,6 @@ urlpatterns = [
     path('salir', views.salir, name='logout'),
 
     path('inicio', views.Dashboard.as_view(), name='dashboard'),
-    path('clientes/', include('apps.clientes.urls'))
+    path('clientes/', include('apps.clientes.urls')),
+    path('articulos/', include('apps.articulos.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
