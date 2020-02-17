@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    
+
+    <div class="col-md-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Lista de Artículos </h2>
+          
+          <!-- buscador de listado -->
+          <div class="title_right">
+            <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Buscar por ...">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button">Aceptar</button>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- buscador de listado -->
+          
+          <div class="clearfix"></div>
+
+        </div>
+        <div class="x_content">
+          <br />
+         
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>descripcion</th>
+                <th>marca</th>
+                <th>rubro</th>
+                <th>precio_compra</th>
+                <th>precio_venta</th>
+                <th>Detalle</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              {% for articulo in object_list %}
+
+              <tr>
+                <th scope="row">{{ articulo.id  }}</th>
+                <td>{{ articulo.descripcion }}</td>
+                <td>{% if articulo.marca %}{{ articulo.marca }}{% else %}--{% endif %}</td>
+                <td>{% if articulo.marca %}{{ articulo.rubro }}{% else %}--{% endif %}</td>
+                <td>{% if articulo.precio_venta %}{{ articulo.precio_compra }}{% else %}--{% endif %}</td>
+                <td>{% if articulo.precio_venta %}{{ articulo.precio_venta }}{% else %}--{% endif %}</td>
+                <td><button type="button" class="btn btn-info"><i class="fa fa-eye"></i></button></td>
+                <td><button type="button" class="btn btn-success"><i class="fa fa-pencil"></i></button></td>
+                <td><button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+
+        </div>
+      </div>
+    </div>
+
+
+   
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+{% endblock %}

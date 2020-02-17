@@ -20,7 +20,7 @@ class Articulo(models.Model):
     imagen = models.ImageField(upload_to='articulos', null=True, blank=True)
     alicuota_iva = models.DecimalField(max_digits=12, decimal_places=2, default=21, 
     blank=True, null=True)
-    fecha_compra = models.DateTimeField(auto_created=True)
+    fecha_compra = models.DateTimeField(auto_created=True, blank=True, null=True)
 
     def __str__(self):
         return str(self.descripcion)
