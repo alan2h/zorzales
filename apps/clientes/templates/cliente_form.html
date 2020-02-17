@@ -28,7 +28,15 @@
                 <label class="control-label col-md-3 col-sm-3 ">Nombre</label>
                 <div class="col-md-9 col-sm-9 ">
                     {{ form.nombre }}
+                    <!-- error -->
+                        {% if form.nombre.errors %}
+                          <div class="alert alert-danger" role="alert">
+                            <p>{{ form.nombre.errors|striptags }}</p>
+                          </div>  
+                        {% endif %}
+                      <!-- error -->
                 </div>
+                
                 </div>
              <!-- controles -->
 
@@ -37,6 +45,13 @@
                 <label class="control-label col-md-3 col-sm-3 ">Apellido</label>
                 <div class="col-md-9 col-sm-9 ">
                     {{ form.apellido }}
+                     <!-- error -->
+                        {% if form.apellido.errors %}
+                          <div class="alert alert-danger" role="alert">
+                            <p>{{ form.apellido.errors|striptags }}</p>
+                          </div>  
+                        {% endif %}
+                      <!-- error -->
                 </div>
                 </div>
              <!-- controles -->
@@ -46,6 +61,13 @@
                 <label class="control-label col-md-3 col-sm-3 ">Fecha de Nacimiento</label>
                 <div class="col-md-9 col-sm-9 ">
                     {{ form.fecha_nacimiento }}
+                    <!-- error -->
+                        {% if form.fecha_nacimiento.errors %}
+                          <div class="alert alert-danger" role="alert">
+                            <p>{{ form.fecha_nacimiento.errors|striptags }}</p>
+                          </div>  
+                        {% endif %}
+                      <!-- error -->
                 </div>
                 </div>
              <!-- controles -->
@@ -55,6 +77,13 @@
               <label class="control-label col-md-3 col-sm-3 ">E-mail</label>
               <div class="col-md-9 col-sm-9 ">
                   {{ form.email }}
+                    <!-- error -->
+                      {% if form.email.errors %}
+                        <div class="alert alert-danger" role="alert">
+                          <p>{{ form.email.errors|striptags }}</p>
+                        </div>  
+                      {% endif %}
+                    <!-- error -->
               </div>
               </div>
            <!-- controles -->
@@ -64,6 +93,13 @@
               <label class="control-label col-md-3 col-sm-3 ">Teléfono</label>
               <div class="col-md-9 col-sm-9 ">
                   {{ form.telefono }}
+                   <!-- error -->
+                      {% if form.telefono.errors %}
+                        <div class="alert alert-danger" role="alert">
+                          <p>{{ form.telefono.errors|striptags }}</p>
+                        </div>  
+                      {% endif %}
+                    <!-- error -->
               </div>
               </div>
            <!-- controles -->
@@ -71,7 +107,7 @@
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-9 col-sm-9  offset-md-3">
-                <button type="button" class="btn btn-primary">Cancelar</button>
+                <a  href="/clientes/listado" type="button" class="btn btn-primary">Cancelar</a>
                 <button type="submit" class="btn btn-success">Guardar</button>
               </div>
             </div>
