@@ -31,4 +31,5 @@ urlpatterns = [
     path('articulos/', include('apps.articulos.urls')),
     # complementos
     path('complementos/marcas/', include('apps.complementos.articulos.marcas.urls')),
+    path('complementos/rubros/', include('apps.complementos.articulos.rubros.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
