@@ -22,9 +22,15 @@
             </div>
           </div>
 
-          <!-- buscador de listado -->
+          <!-- buscador de listado /articulos/imprimir/pdf/-->
           
           <div class="clearfix"></div>
+           <div class="form-group">
+                    <div class="col-md-9 col-sm-9  offset-md-3">
+                        <a  href="/articulos/alta" type="button" class="btn btn-success">Nuevo</a>
+                        <a  href="/articulos/imprimir/pdf/" type="button" class="btn btn-info">Imprimir</a>
+                    </div>
+                </div>
 
         </div>
         <div class="x_content">
@@ -57,7 +63,7 @@
                 <td>{% if articulo.precio_venta %}${{ articulo.precio_compra }}{% else %}--{% endif %}</td>
                 <td>{% if articulo.precio_venta %}${{ articulo.precio_venta }}{% else %}--{% endif %}</td>
                 <td>{% if articulo.stock %}{{ articulo.stock }}{% else %}--{% endif %}</td>
-                <td><button type="button" class="btn btn-info"><i class="fa fa-eye"></i></button></td>
+                <td><a href="/articulos/detalle/{{ articulo.id }}" type="button" class="btn btn-info"><i class="fa fa-eye"></i></a></td>
                 <td><a href="/articulos/editar/{{ articulo.id }}" type="button" class="btn btn-success"><i class="fa fa-pencil"></i></a></td>
                 <td><a href="/articulos/eliminar/{{ articulo.id }}" type="button" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
               </tr>

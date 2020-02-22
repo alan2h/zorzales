@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block content %}
+ <div class="col-md-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Detalle del Artículo </h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+              
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <br />
+         
+         <!-- /.row -->
+
+                      <div class="row">
+                        <!-- accepted payments column -->
+                        
+                        <!-- /.col -->
+                        <div class="col-md-6">
+                          <p class="lead">{{ object }} - {{ object.descripcion }}</p>
+                          <div class="table-responsive">
+                            <table class="table">
+                              <tbody>
+                                <tr>
+                                  <th style="width:50%">Codigo de Barras</th>
+                                  <td>{{ object.codigo_barra }}</td>
+                                </tr>
+                                <tr>
+                                  <th>Descripción</th>
+                                  <td>{{ object.descripcion }}</td>
+                                </tr>
+                                <tr>
+                                  <th>Rubro</th>
+                                  <td>{{ object.rubro.descripcion }}</td>
+                                </tr>
+                                 <tr>
+                                  <th>Marca</th>
+                                  <td>{{ object.marca.descripcion }}</td>
+                                </tr>
+                                <tr>
+                                  <th>Precio de Venta</th>
+                                  <td>${{ object.precio_venta }}</td>
+                                </tr>
+                                <tr>
+                                  <th>Precio de Compra</th>
+                                  <td>${{ object.precio_compra }}</td>
+                                </tr>
+                                 <tr>
+                                  <th>Stock</th>
+                                  <td>{{ object.stock }}</td>
+                                </tr>
+                                
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div class="col-md-9 col-sm-9  offset-md-3">
+                        <a  href="/articulos/listado" type="button" class="btn btn-primary">Cancelar</a>
+                        <a  href="#" type="button" class="btn btn-success">Imprimir</a>
+                    </div>
+                </div>
+        </div>
+      </div>
+    </div>
+
+
+   
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+{% endblock %}
