@@ -20,3 +20,14 @@ class ArticuloListView(ListView):
 
     queryset = Articulo.objects.all()
     template_name = 'articulos_list.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+
+        queryset = Articulo.objects.all()
+        if 'search' in self.request.GET:
+            if self.request.GET.get('search') != '':
+                queryset = Articulo.objects.filter(descripcion__icontains=self.request.GET.get('search'))
+                if len(queryset) == 0:
+                    queryset = Articulo.objects.filter(codigo_barra__icontains=self.request.GET.get('search'))
+        return queryset
