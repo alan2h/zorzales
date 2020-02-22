@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    
+
+    <div class="col-md-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Cargar Marcas </h2>
+                    
+          <div class="clearfix"></div>
+
+        </div>
+        <div class="x_content">
+          <br />
+         
+            <form method="POST"  class="form-horizontal form-label-left"> {% csrf_token %}
+
+              <!-- controles -->
+                <div class="form-group row ">
+                    <label class="control-label col-md-3 col-sm-3 ">Código de barra</label>
+                    <div class="col-md-9 col-sm-9 ">
+                        {{ form.descripcion }}
+                        <!-- error -->
+                            {% if form.descripcion.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                <p>{{ form.descripcion.errors|striptags }}</p>
+                            </div>  
+                            {% endif %}
+                        <!-- error -->
+                    </div>
+                </div>
+             <!-- controles -->
+
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-9 col-sm-9  offset-md-3">
+                <a  href="#" type="button" class="btn btn-primary">Cancelar</a>
+                <button type="submit" class="btn btn-success">Guardar</button>
+              </div>
+            </div>
+
+            </form>
+
+        </div>
+      </div>
+    </div>
+
+
+   
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+{% endblock %}

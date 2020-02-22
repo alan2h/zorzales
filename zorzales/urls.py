@@ -29,4 +29,6 @@ urlpatterns = [
     path('inicio', views.Dashboard.as_view(), name='dashboard'),
     path('clientes/', include('apps.clientes.urls')),
     path('articulos/', include('apps.articulos.urls')),
+    # complementos
+    path('complementos/marcas/', include('apps.complementos.articulos.marcas.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

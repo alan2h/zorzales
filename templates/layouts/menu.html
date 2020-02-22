@@ -5,8 +5,16 @@
 
   <li><a><i class="fa fa-shopping-cart"></i> Artículos <span class="fa fa-chevron-down"></span></a>
     <ul class="nav child_menu">
-      <li><a href="/articulos/alta">Cargar Artículos</a></li>
-      <li><a href="/articulos/listado">Listar Artículos</a></li>
+       <li><a href="/articulos/alta">Cargar Artículos</a></li>
+          <li><a href="/articulos/listado">Listar Artículos</a>
+            <li><a>Complementos<span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+                <li><a href="/complementos/marcas/alta">Cargar marcas</a>
+                </li>
+                <li ><a href="/complementos/marcas/listado">Listar marcas</a>
+                </li>
+              </ul>
+          </li>
     </ul>
   </li>   
 
@@ -48,6 +56,7 @@
         <li><a href="#">Gastos Generales</a></li>
         <li><a href="#">Ventas</a></li>
       </ul>
-    </li>                          
+    </li>
+                              
   </ul>
 {% endblock %}
