@@ -211,7 +211,7 @@
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-9 col-sm-9  offset-md-3">
-                <a  href="#" type="button" class="btn btn-primary">Cancelar</a>
+                <a  href="/articulos/listado" type="button" class="btn btn-primary">Cancelar</a>
                 <button type="submit" class="btn btn-success">Guardar</button>
               </div>
             </div>
@@ -236,11 +236,20 @@
         </button>
       </div>
       <div class="modal-body">
-        ...
+        <div class="form-group">
+          <label for="">Descripción</label>
+          <input type="text" class="form-control" name="descripcion_marca" id="id_descripcion_marca" aria-describedby="helpId" placeholder="">
+          <small id="helpId" class="form-text text-muted">Ingrese el marca aquí</small>
+            <!-- error  message -->
+              <div id="id_mensaje_error_marca" class="alert alert-danger" role="alert">
+                <p>Error de carga, verifique el dato ingresado</p>
+              </div>  
+            <!-- error -->
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar</button>
+        <button onclick="guadarMarca()" type="button" class="btn btn-primary">Guardar</button>
       </div>
     </div>
   </div>
@@ -258,11 +267,20 @@
         </button>
       </div>
       <div class="modal-body">
-        ...
+         <div class="form-group">
+          <label for="">Descripción</label>
+          <input type="text" class="form-control" name="descripcion_rubro" id="id_descripcion_rubro" aria-describedby="helpId" placeholder="">
+          <small id="helpId" class="form-text text-muted">Ingrese el rubro aquí</small>
+            <!-- error  message -->
+              <div id="id_mensaje_error_rubro" class="alert alert-danger" role="alert">
+                <p>Error de carga, verifique el dato ingresado</p>
+              </div>  
+            <!-- error -->
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button onclick="guadarRubro()" type="button" class="btn btn-primary">Guardar</button>
       </div>
     </div>
   </div>
@@ -273,11 +291,68 @@
 
 {% block extra_js %}
   <script>
+     $('#id_mensaje_error_marca').hide();
+     $('#id_mensaje_error_rubro').hide();
+
+   /* ------------- complemento marca ----------- */
+   
     function abrirMarca(){
       $('#id_form_modal_marcas').modal('show');
     }
+    function guadarMarca(){
+      $.ajax({
+        url: '/articulos/complementos/marca/alta',
+        type: 'post',
+        data: {
+          'descripcion': $('#id_descripcion_marca').val(),
+          'csrfmiddlewaretoken': '{{ csrf_token }}'
+        },
+        success : function(data){
+          if (data.status == '200'){
+            $('#id_mensaje_error_marca').hide();
+            $('#id_marca').append($('<option>',{
+              value: data.id,
+              text: $('#id_descripcion_marca').val()
+            }));
+            $('#id_form_modal_marcas').modal('hide');
+             $('#id_marca').val(data.id);
+             $('#id_descripcion_marca').val('');
+          }else{
+            $('#id_mensaje_error_marca').show();
+          }
+        }
+      })
+    }
+    /* ------------- complemento marca ----------- */
+
+    /* ------------- complemento rubro ----------- */
     function abrirRubro(){
       $('#id_form_modal_rubros').modal('show');
     }
+     function guadarRubro(){
+      $.ajax({
+        url: '/articulos/complementos/rubro/alta',
+        type: 'post',
+        data: {
+          'descripcion': $('#id_descripcion_rubro').val(),
+          'csrfmiddlewaretoken': '{{ csrf_token }}'
+        },
+        success : function(data){
+          if (data.status == '200'){
+            $('#id_mensaje_error_rubro').hide();
+            $('#id_rubro').append($('<option>',{
+              value: data.id,
+              text: $('#id_descripcion_rubro').val()
+            }));
+            $('#id_form_modal_rubros').modal('hide');
+             $('#id_rubro').val(data.id);
+             $('#id_descripcion_rubro').val('');
+          }else{
+            $('#id_mensaje_error_rubro').show();
+          }
+        }
+      })
+    }
+    /* ------------- complemento rubro ----------- */
   </script>
 {% endblock %}
