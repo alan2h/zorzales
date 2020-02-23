@@ -10,14 +10,16 @@
           
           <!-- buscador de listado -->
           <div class="title_right">
-            <div class="col-md-5 col-sm-5   form-group pull-right top_search">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Buscar por ...">
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button">Aceptar</button>
-                </span>
+          <form method="GET">
+              <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+                <div class="input-group">
+                  <input name="search" type="text" class="form-control" placeholder="Buscar por ...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">Aceptar</button>
+                  </span>
+                </div>
               </div>
-            </div>
+          </form>  
           </div>
 
           <!-- buscador de listado -->
@@ -33,7 +35,6 @@
               <tr>
                 <th>#</th>
                 <th>Descripción</th>
-                <th>Detalle</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
               </tr>
@@ -45,13 +46,29 @@
               <tr>
                 <th scope="row">{{ marca.id  }}</th>
                 <th scope="row">{{ marca.descripcion  }}</th>
-                <td><button type="button" class="btn btn-info"><i class="fa fa-eye"></i></button></td>
+                
                 <td><a href="/complementos/marcas/editar/{{ marca.id }}" type="button" class="btn btn-success"><i class="fa fa-pencil"></i></a></td>
                 <td><a href="/complementos/marcas/eliminar/{{ marca.id }}" type="button" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
               </tr>
               {% endfor %}
             </tbody>
           </table>
+
+
+         {% if is_paginated %}
+          <nav aria-label="Page navigation conatiner"></nav>
+          <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; Atrás </a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> Siguiente &raquo;</a></li>
+
+            {% endif %}
+          </ul>
+          </nav>
+        </div>
+        {% endif %}
 
 
         </div>

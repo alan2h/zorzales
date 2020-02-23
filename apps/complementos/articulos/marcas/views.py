@@ -19,6 +19,16 @@ class MarcaListView(ListView):
 
     queryset = Marca.objects.all()
     template_name = 'marcas_list.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        queryset = Marca.objects.all()
+        print('entrar aca ')
+        if 'search' in self.request.GET:
+            if self.request.GET.get('search') != '':
+                print(self.request.GET, '========')
+                queryset = Marca.objects.filter(descripcion__contains=self.request.GET.get('search'))
+        return queryset
 
 
 class MarcaDeleteView(DeleteView):
