@@ -15,6 +15,8 @@ from django.contrib.messages.views import SuccessMessageMixin
 from .models import Articulo
 from .forms import ArticuloForm
 
+from apps.lib.delete.delete_logic import DeleteLogic
+
 
 class ArticuloCreateView(SuccessMessageMixin, CreateView):
 
@@ -27,25 +29,25 @@ class ArticuloCreateView(SuccessMessageMixin, CreateView):
 
 class ArticuloListView(ListView):
 
-    queryset = Articulo.objects.all()
+    queryset = Articulo.objects.filter(baja=False)
     template_name = 'articulos_list.html'
     paginate_by = 10
 
     def get_queryset(self):
 
-        queryset = Articulo.objects.all()
+        queryset = Articulo.objects.filter(baja=False)
         if 'search' in self.request.GET:
             if self.request.GET.get('search') != '':
-                queryset = Articulo.objects.filter(descripcion__icontains=self.request.GET.get('search'))
+                queryset = Articulo.objects.filter(descripcion__icontains=self.request.GET.get('search'), baja=False)
                 if len(queryset) == 0:
                     queryset = Articulo.objects.filter(
-                        codigo_barra__icontains=self.request.GET.get('search'))
+                        codigo_barra__icontains=self.request.GET.get('search'), baja=False)
                     if len(queryset) == 0:
                         queryset = Articulo.objects.filter(
-                            marca__descripcion__icontains=self.request.GET.get('search'))
+                            marca__descripcion__icontains=self.request.GET.get('search'), baja=False)
                         if len(queryset) == 0:
                             queryset = Articulo.objects.filter(
-                                rubro__descripcion__icontains=self.request.GET.get('search'))
+                                rubro__descripcion__icontains=self.request.GET.get('search'), baja=False)
         return queryset
 
 
@@ -58,7 +60,7 @@ class ArticuloUpdateView(SuccessMessageMixin, UpdateView):
     success_message = 'El artículo se modifico con éxito'
 
 
-class ArticuloDeleteView(DeleteView):
+class ArticuloDeleteView(DeleteLogic, DeleteView):
 
     model = Articulo
     template_name = 'articulo_delete_confirm.html'
