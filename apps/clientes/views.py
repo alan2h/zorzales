@@ -5,6 +5,8 @@ from django.contrib.messages.views import SuccessMessageMixin
 from .models import Cliente
 from .forms import ClienteForm
 
+from apps.lib.delete.delete_logic import DeleteLogic
+
 
 class ClienteCreateView(SuccessMessageMixin, CreateView):
 
@@ -17,7 +19,7 @@ class ClienteCreateView(SuccessMessageMixin, CreateView):
 
 class ClientesListView(ListView):
 
-    model = Cliente
+    queryset = Cliente.objects.filter(baja=False)
     template_name = 'clientes_listado.html'
 
 
@@ -30,7 +32,7 @@ class ClienteUpdateView(SuccessMessageMixin, UpdateView):
     success_message = 'El Cliente se modifico con éxito'
 
 
-class ClienteDeleteView(DeleteView):
+class ClienteDeleteView(DeleteLogic, DeleteView):
 
     model = Cliente
     template_name = 'cliente_delete_confirm.html'

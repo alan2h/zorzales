@@ -11,6 +11,12 @@ class Cliente(Persona):
     baja = models.BooleanField(default=False)
     fecha_baja = models.DateField(blank=True, null=True)
     motivo = models.CharField(max_length=600, blank=True, null=True)
+    observacion = models.TextField(max_length=300, blank=True, null=True)
+
+    # para realizar bajas
+
+    baja = models.BooleanField(default=False, null=True, blank=True)
+    fecha_baja = models.DateField(blank=True, null=True)
 
     def __str__(self):
 

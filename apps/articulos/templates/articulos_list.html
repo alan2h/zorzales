@@ -67,6 +67,8 @@
                 <td><a href="/articulos/editar/{{ articulo.id }}" type="button" class="btn btn-success"><i class="fa fa-pencil"></i></a></td>
                 <td><a href="/articulos/eliminar/{{ articulo.id }}" type="button" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
               </tr>
+              {% empty %}
+               <div class="alert alert-error" role="alert">No existen registro cargados con esa busqueda</div>
               {% endfor %}
             </tbody>
           </table>
