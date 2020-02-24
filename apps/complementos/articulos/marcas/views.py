@@ -5,6 +5,8 @@ from django.contrib.messages.views import SuccessMessageMixin
 from .models import Marca
 from .forms import MarcaForm
 
+from apps.lib.delete.delete_logic import DeleteLogic
+
 
 class MarcaCreateView(SuccessMessageMixin, CreateView):
 
@@ -17,21 +19,22 @@ class MarcaCreateView(SuccessMessageMixin, CreateView):
 
 class MarcaListView(ListView):
 
-    queryset = Marca.objects.all()
+    queryset = Marca.objects.filter(baja=False)
     template_name = 'marcas_list.html'
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = Marca.objects.all()
+        queryset = Marca.objects.filter(baja=False)
         print('entrar aca ')
         if 'search' in self.request.GET:
             if self.request.GET.get('search') != '':
                 print(self.request.GET, '========')
-                queryset = Marca.objects.filter(descripcion__contains=self.request.GET.get('search'))
+                queryset = Marca.objects.filter(descripcion__contains=self.request.GET.get('search'),\
+                     baja=False)
         return queryset
 
 
-class MarcaDeleteView(DeleteView):
+class MarcaDeleteView(DeleteLogic, DeleteView):
 
     model = Marca
     template_name = 'marca_delete_confirm.html'
