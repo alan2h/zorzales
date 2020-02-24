@@ -40,9 +40,7 @@
              <!-- controles -->
                 <div class="form-group row ">
                   <label class="control-label col-md-3 col-sm-3 ">Artículo</label>
-                    <div class="col-md-8 col-sm-8 ">
-                        <input class="form-control" type="text">
-                    </div>
+                    
                     <div class="col-md-1 col-sm-1 ">
                       <button onclick="abrirListaArticulos()" class="btn btn-info"><i class="fa fa-search"></i></button>
                     </div>
@@ -72,22 +70,16 @@
           <br />
 
           <!-- tabla de articulos -->
-           <table class="table">
+           <table id="id_lista_articulos_final" class="table">
                       <thead>
                         <tr>
-                          <th>#</th>
+                          <th>Cantidad</th>
                           <th>Descripción</th>
                           <th>Precio de Compra</th>
                           <th>Eliminar</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td><button class="btn btn-danger"><i class="fa fa-trash" ></i></button></td>
-                        </tr>
                       </tbody>
                     </table>
               <!-- tabla de articulos -->
@@ -207,8 +199,6 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button onclick="" type="button" class="btn btn-primary">Guardar</button>
       </div>
     </div>
   </div>
@@ -269,7 +259,7 @@
           } 
           for (var x=0; x < datos.length; x++){
             let articulos = datos[x].fields; // desarmo las filas de modelo 
-            $('#id_tabla_articulos tbody:last').append('<tr>' + 
+            $('#id_tabla_articulos tbody:last').append('<tr onclick="seleccionArticulo(' + datos[x].pk + ')">' + 
             '<th>' + datos[x].pk + '</th>' + 
             '<th>' + articulos.codigo_barra  +'</th>' + 
             '<td>' + articulos.descripcion  +'</td>' + 
@@ -302,9 +292,9 @@
           } 
           for (var x=0; x < datos.length; x++){
             let articulos = datos[x].fields; // desarmo las filas de modelo 
-            $('#id_tabla_articulos tbody:last').append('<tr>' + 
-            '<th>' + datos[x].pk + '</th>' + 
-            '<th>' + articulos.codigo_barra  +'</th>' + 
+            $('#id_tabla_articulos tbody:last').append('<tr onclick="seleccionArticulo(' + datos[x].pk + ')>' + 
+            '<td>' + datos[x].pk + '</td>' + 
+            '<td>' + articulos.codigo_barra  +'</td>' + 
             '<td>' + articulos.descripcion  +'</td>' + 
             '<td>$' + articulos.precio_compra  +'</td>' + 
             '<td>$' + articulos.precio_venta  +'</td>' + 
@@ -314,6 +304,35 @@
           }
         }
       })
+    }
+
+    function seleccionArticulo(id){
+      let cantidad = prompt('Ingrese la cantidad', '1')
+      if (cantidad){
+           $.ajax({
+            url: '/pedidos/articulos/obtener',
+            type: 'get',
+            data: {
+              'csrfmiddlewaretoken': '{{ csrf_token }}',
+              'id': id
+            },
+            success: function(data){
+                 datos = JSON.parse(data); // parsear a json los datos
+                  for (var x=0; x < datos.length; x++){
+                    let articulos = datos[x].fields; // desarmo las filas de modelo 
+                     console.log(articulos)
+                     //id_lista_articulos_final
+                      $('#id_lista_articulos_final tbody:last').append('<tr>' + 
+                      '<td>' + cantidad + '</td>' + 
+                      '<td>' + articulos.descripcion  +'</td>' + 
+                      '<td>$' + articulos.precio_compra  +'</td>' + 
+                      '<td> <button class="btn btn-danger"><i class="fa fa-trash" ></i></button> </td>' +
+                      '</tr>'
+                      )
+                  }
+            }
+          })
+      }
     }
 
  </script>

@@ -7,7 +7,6 @@ from apps.articulos.models import Articulo
 
 def articulo_list(request):
 
-    print(request.GET)
     articulos = Articulo.objects.filter(baja=False)
     if 'search' in request.GET:
         if request.GET.get('search') != '':
@@ -17,3 +16,12 @@ def articulo_list(request):
     paginator = Paginator(articulos, 5)
     articulos_list = paginator.page(request.GET.get('pagina'))
     return JsonResponse(serializers.serialize('json', articulos_list), safe=False)
+
+
+
+def get_articulo(request):
+
+    if 'id' in request.GET:
+        if request.GET.get('id') != '':
+            articulos = Articulo.objects.filter(pk=request.GET.get('id'))
+    return JsonResponse(serializers.serialize('json', articulos), safe=False)
