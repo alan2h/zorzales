@@ -168,12 +168,13 @@
         <div class="title_right">
             <div class="col-md-5 col-sm-5   form-group pull-right top_search">
                 <div class="input-group">
-                    <input name="search" type="text" class="form-control" placeholder="Buscar por ...">
+                    <input id="id_txt_search" name="search" type="text" class="form-control" placeholder="Buscar por ...">
+                    <button onclick="buscarText()" class="btn btn-success"><i class="fa fa-search"></i></button>
                 </div>
             </div>
           </div>
         <div class="form-group">
-          <table class="table">
+          <table id="id_tabla_articulos" class="table">
               <thead>
                 <tr>
                   <th>#</th>
@@ -181,19 +182,28 @@
                   <th>Descripción</th>
                   <th>Precio de Compra</th>
                   <th>Precio de Venta</th>
+                  <th>Stock</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <th>1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>Otto</td>
-                  
-                </tr>
+               
               </tbody>
             </table>
+
+            <nav aria-label="..." id="id_div_pagination">
+              <ul class="pagination">
+                <li class="page-item">
+                  <span onclick="paginaAtras()" class="page-link">Atrás</span>
+                </li>
+              
+                <li class="page-item">
+                  <a onclick="paginaSiguiente()" class="page-link" href="#">Siguiente</a>
+                </li>
+              </ul>
+            </nav>
+
+
+
         </div>
       </div>
       <div class="modal-footer">
@@ -209,7 +219,8 @@
 
 {% block extra_js %}
  <script>
-
+    var texto_busqueda = '';
+    var pagina = 1;
     $(document).ready(function (){
       loadListArticulos();
     })
@@ -223,20 +234,87 @@
     }
 
     function loadListArticulos(){
+      ajaxArticulos(pagina)
+    }
+
+    function paginaSiguiente(){
+      pagina += 1;
+      ajaxArticulos(pagina)
+    }
+
+    function paginaAtras(){
+      pagina -= 1;
+      if (pagina < 1){
+        pagina = 1;
+      }
+      ajaxArticulos(pagina)
+      
+    }
+
+    function ajaxArticulos(pagina){
+      $('#id_tabla_articulos tbody:last').empty(); // remover las filas de la tabla articulos
       $.ajax({
         url: '/pedidos/articulos/listado',
-        type: 'post',
+        type: 'get',
         data: {
-          'csrfmiddlewaretoken': '{{ csrf_token }}'
+          'csrfmiddlewaretoken': '{{ csrf_token }}',
+          'pagina': pagina,
+          'search': texto_busqueda
         },
         success: function(data){
           datos = JSON.parse(data); // parsear a json los datos
+          
+          if (datos.length <= 0){
+            pagina = 1 ;
+          } 
           for (var x=0; x < datos.length; x++){
             let articulos = datos[x].fields; // desarmo las filas de modelo 
-            console.log(articulos);
+            $('#id_tabla_articulos tbody:last').append('<tr>' + 
+            '<th>' + datos[x].pk + '</th>' + 
+            '<th>' + articulos.codigo_barra  +'</th>' + 
+            '<td>' + articulos.descripcion  +'</td>' + 
+            '<td>$' + articulos.precio_compra  +'</td>' + 
+            '<td>$' + articulos.precio_venta  +'</td>' + 
+            '<td>' + articulos.stock  +'</td>' + 
+            '</tr>'
+            )
           }
         }
       })
     }
+
+    function buscarText(){
+      texto_busqueda = $('#id_txt_search').val();
+      $('#id_tabla_articulos tbody:last').empty(); // remover las filas de la tabla articulos
+       $.ajax({
+        url: '/pedidos/articulos/listado',
+        type: 'get',
+        data: {
+          'csrfmiddlewaretoken': '{{ csrf_token }}',
+          'pagina': pagina,
+          'search': texto_busqueda
+        },
+        success: function(data){
+          datos = JSON.parse(data); // parsear a json los datos
+          
+          if (datos.length <= 0){
+            pagina = 1 ;
+          } 
+          for (var x=0; x < datos.length; x++){
+            let articulos = datos[x].fields; // desarmo las filas de modelo 
+            $('#id_tabla_articulos tbody:last').append('<tr>' + 
+            '<th>' + datos[x].pk + '</th>' + 
+            '<th>' + articulos.codigo_barra  +'</th>' + 
+            '<td>' + articulos.descripcion  +'</td>' + 
+            '<td>$' + articulos.precio_compra  +'</td>' + 
+            '<td>$' + articulos.precio_venta  +'</td>' + 
+            '<td>' + articulos.stock  +'</td>' + 
+            '</tr>'
+            )
+          }
+        }
+      })
+    }
+
  </script>
 {% endblock %}
