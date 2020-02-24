@@ -11,6 +11,11 @@ class Pedido(models.Model):
     null=True, blank=True)
     observacion = models.TextField(max_length=300, null=True, blank=True)
 
+    # para realizar bajas
+
+    baja = models.BooleanField(default=False, null=True, blank=True)
+    fecha_baja = models.DateField(blank=True, null=True)
+
     def __str__(self):
 
         return str(self.fecha)

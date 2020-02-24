@@ -29,6 +29,7 @@ urlpatterns = [
     path('inicio', views.Dashboard.as_view(), name='dashboard'),
     path('clientes/', include('apps.clientes.urls')),
     path('articulos/', include('apps.articulos.urls')),
+    path('pedidos/', include('apps.pedidos.urls')),
     # complementos
     path('complementos/marcas/', include('apps.complementos.articulos.marcas.urls')),
     path('complementos/rubros/', include('apps.complementos.articulos.rubros.urls')),
