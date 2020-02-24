@@ -44,7 +44,7 @@
                         <input class="form-control" type="text">
                     </div>
                     <div class="col-md-1 col-sm-1 ">
-                      <button class="btn btn-info"><i class="fa fa-search"></i></button>
+                      <button onclick="abrirListaArticulos()" class="btn btn-info"><i class="fa fa-search"></i></button>
                     </div>
                 </div>
              <!-- controles -->
@@ -153,12 +153,90 @@
     </div>
   </div>
 
+
+<!-- modal de lista de articulos  -->
+ <div id="id_form_modal_lista_articulos" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Lista de Artículos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="title_right">
+            <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+                <div class="input-group">
+                    <input name="search" type="text" class="form-control" placeholder="Buscar por ...">
+                </div>
+            </div>
+          </div>
+        <div class="form-group">
+          <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Código de barras</th>
+                  <th>Descripción</th>
+                  <th>Precio de Compra</th>
+                  <th>Precio de Venta</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <th>1</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>Otto</td>
+                  
+                </tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button onclick="" type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal de lista de articulos  -->
+
 {% endblock %}
 
 {% block extra_js %}
  <script>
+
+    $(document).ready(function (){
+      loadListArticulos();
+    })
+
      $('#id_fecha').datetimepicker({
         format: 'DD/MM/YYYY'
     });
+
+    function abrirListaArticulos(){
+      $('#id_form_modal_lista_articulos').modal('show');
+    }
+
+    function loadListArticulos(){
+      $.ajax({
+        url: '/pedidos/articulos/listado',
+        type: 'post',
+        data: {
+          'csrfmiddlewaretoken': '{{ csrf_token }}'
+        },
+        success: function(data){
+          datos = JSON.parse(data); // parsear a json los datos
+          for (var x=0; x < datos.length; x++){
+            let articulos = datos[x].fields; // desarmo las filas de modelo 
+            console.log(articulos);
+          }
+        }
+      })
+    }
  </script>
 {% endblock %}
