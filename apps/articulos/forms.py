@@ -24,7 +24,7 @@ class ArticuloForm(forms.ModelForm):
         'class': 'form-control'
     }))
 
-    rubro = forms.ModelChoiceField(required=False, queryset=Rubro.objects.all(), 
+    rubro = forms.ModelChoiceField(required=False, queryset=Rubro.objects.filter(baja=False), 
     widget=forms.Select(attrs={
         'class': 'form-control'
     }))
