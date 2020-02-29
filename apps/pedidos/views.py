@@ -12,3 +12,7 @@ class PedidoCreateView(View):
     def get(self, request, *args, **kwargs):
         pedido_form = PedidoForm()
         return render(request, 'pedido_form.html', context={'form': pedido_form})
+
+    def post(self, request, *args, **kwargs):
+        print(self.request.POST)
+        return False

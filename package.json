@@ -1,0 +1,33 @@
+{
+  "name": "zorzales",
+  "version": "1.0.0",
+  "description": "> A Vue.js project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx webpack --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alan2h/zorzales.git"
+  },
+  "author": "Alan Beck",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alan2h/zorzales/issues"
+  },
+  "homepage": "https://github.com/alan2h/zorzales#readme",
+  "devDependencies": {
+    "vue-loader": "^15.9.0",
+    "vue-template-compiler": "^2.6.11",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "bootstrap": "^4.4.1",
+    "bootstrap-vue": "^2.5.0",
+    "vue": "^2.6.11",
+    "vuex": "^3.1.2"
+  }
+}
