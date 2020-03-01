@@ -21,10 +21,17 @@
         
         <form class="form-horizontal form-label-left">
             <div class="form-group row">
+                <label class="control-label col-md-3" for="first-name">Fecha <span class="required">*</span>
+                </label>
+                <div class="col-md-7">
+                    <input type="text" required="required" class="form-control col-md-12 ">
+                </div>
+            </div>
+            <div class="form-group row">
             <label class="control-label col-md-3" for="first-name">Código de barras <span class="required">*</span>
             </label>
             <div class="col-md-7">
-                <input type="text" id="first-name2" required="required" class="form-control col-md-12 ">
+                <input type="text" required="required" class="form-control col-md-12 ">
             </div>
             <!-- controles adicionales  -->
             <articulos_list></articulos_list>
