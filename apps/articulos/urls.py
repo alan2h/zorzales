@@ -1,12 +1,19 @@
-from django.urls import path
+from django.urls import path, include
 
 from .views import ArticuloCreateView, ArticuloListView, \
     ArticuloUpdateView, ArticuloDeleteView, ArticuloDetailView, ArticuloReportePDF
+from .viewset import ArticuloViewSet
+
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register(r'api', ArticuloViewSet)
 
 # ajax functions
 from . import helpers
 
 urlpatterns = [
+    path('', include(router.urls)),
     path('alta', ArticuloCreateView.as_view(), name='ArticuloCreateView'),
     path('listado', ArticuloListView.as_view(), name='ArticuloListView'),
     path('editar/<int:pk>', ArticuloUpdateView.as_view(), name='ArticuloUpdateView'),

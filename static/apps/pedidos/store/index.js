@@ -11,7 +11,9 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     state: {
         pedidos: [],
-        articulos: []
+        articulos: [],
+        pagina_siguiente: '',
+        pagina_atras: ''
     },
     actions,
     mutations,

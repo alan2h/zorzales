@@ -1,19 +1,94 @@
 <template>
     <div>
-        <b-button v-b-modal.modal-1><i class="fa fa-search"></i></b-button>
-
-        <b-modal id="modal-1" title="BootstrapVue">
-            <p class="my-4">Hello from modal!</p>
+        <b-button  v-b-modal.modal-1><i class="fa fa-search"></i></b-button>
+        <b-modal size="lg" id="modal-1" title="Lista de Artículos" >
+            <div class="col-md-7">
+                <input @keypress="buscar"  v-model="search" placeholder="ingrese la busqueda del artículo" type="text" id="first-name2" required="required" class="form-control col-md-12 ">
+            </div>
+            
+            <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Descripción</th>
+                        <th>Marca</th>
+                        <th>Rubro</th>
+                        <th>Precio Compra</th>
+                        <th>Precio Venta</th>
+                        <th>Stock</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        
+                    <tr v-for="articulo in get_articulos" :key="articulo.id">
+                        <th scope="row" v-text="articulo.id" ></th>
+                        <td v-text="articulo.descripcion"> </td>
+                        <td v-text="articulo.marca"> </td>
+                        <td v-text="articulo.rubro"> </td>
+                        <td v-text="'$' + articulo.precio_compra" ></td>
+                        <td v-text="'$' + articulo.precio_venta" ></td>
+                        <td v-text="articulo.stock" ></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div v-if="get_articulos.length == 0" class="alert alert-danger" role="alert">
+                            No existen registro
+                        </div>
+                    <template v-slot:modal-footer>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-end">
+                                <li v-if="get_pagina_atras"  class="page-item">
+                                    <a class="page-link" @click="atras(get_pagina_atras)" href="#" tabindex="-1">Atrás</a>
+                                </li>
+                                <li v-if="get_pagina_siguiente" class="page-item">
+                                <a class="page-link" @click="siguiente(get_pagina_siguiente)"  href="#">Siguiente</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="w-100">
+                        <p class="float-left"></p>
+                        <b-button
+                            variant="primary"
+                            size="sm"
+                            class="float-right"
+                            @click="hideModal">
+                        Cerrar
+                        </b-button>
+                    </div>
+                </template>
         </b-modal>
     </div>
 </template>
 
 <script>
+import {mapActions, mapGetters} from 'vuex';
+
 export default {
     data(){
         return{
-            
+            search : ''
         }
+    },
+    methods: {
+          ...mapActions(['set_articulos']),
+          hideModal() {
+            this.$root.$emit('bv::hide::modal', 'modal-1', '#btnShow')
+            },
+            siguiente(url){
+                this.set_articulos(url);
+            },
+            atras(url){
+                this.set_articulos(url);
+            },
+            buscar(){
+                this.set_articulos('/articulos/api/?search=' + this.search);
+            }
+    },
+     mounted(){
+        this.set_articulos('/articulos/api');
+    },
+    computed:{
+        ...mapGetters(['get_articulos', 'get_pagina_siguiente', 'get_pagina_atras']),
     }
 }
 </script>
