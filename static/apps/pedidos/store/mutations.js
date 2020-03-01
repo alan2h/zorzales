@@ -11,3 +11,8 @@ export const set_pagina_siguiente = (state, payload) => {
 export const set_pagina_atras = (state, payload) => {
     state.pagina_atras = payload;
 }
+
+export const set_pedidos_articulos = (state, payload) => {
+    // cargar pedidos desde el form de articulos
+    state.articulos_pedidos.push(payload); // agrego un articulo nuevo 
+}

@@ -3,7 +3,7 @@
         <b-button  v-b-modal.modal-1><i class="fa fa-search"></i></b-button>
         <b-modal size="lg" id="modal-1" title="Lista de Artículos" >
             <div class="col-md-7">
-                <input @keypress="buscar"  v-model="search" placeholder="ingrese la busqueda del artículo" type="text" id="first-name2" required="required" class="form-control col-md-12 ">
+                <input @keypress="buscar"  v-model="search" placeholder="ingrese la busqueda del artículo" type="text"  required="required" class="form-control col-md-12 ">
             </div>
             
             <table class="table table-striped">
@@ -20,11 +20,15 @@
                     </thead>
                     <tbody>
                         
-                    <tr v-for="articulo in get_articulos" :key="articulo.id">
+                    <tr v-for="articulo in get_articulos" :key="articulo.id" @click="seleccionar(articulo)">
                         <th scope="row" v-text="articulo.id" ></th>
                         <td v-text="articulo.descripcion"> </td>
-                        <td v-text="articulo.marca"> </td>
-                        <td v-text="articulo.rubro"> </td>
+                        <template v-if="articulo.marca">
+                            <td v-text="articulo.marca.descripcion"> </td>
+                        </template>
+                        <template v-if="articulo.rubro">
+                            <td v-text="articulo.rubro.descripcion"> </td>
+                        </template>
                         <td v-text="'$' + articulo.precio_compra" ></td>
                         <td v-text="'$' + articulo.precio_venta" ></td>
                         <td v-text="articulo.stock" ></td>
@@ -70,7 +74,7 @@ export default {
         }
     },
     methods: {
-          ...mapActions(['set_articulos']),
+          ...mapActions(['set_articulos', 'set_pedidos_articulos']),
           hideModal() {
             this.$root.$emit('bv::hide::modal', 'modal-1', '#btnShow')
             },
@@ -82,6 +86,11 @@ export default {
             },
             buscar(){
                 this.set_articulos('/articulos/api/?search=' + this.search);
+            },
+            seleccionar(articulo){
+                var cantidad = prompt("Ingrese la cantidad", "");
+                articulo['cantidad'] = cantidad;
+                this.set_pedidos_articulos(articulo);
             }
     },
      mounted(){

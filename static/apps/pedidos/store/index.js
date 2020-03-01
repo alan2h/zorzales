@@ -10,7 +10,7 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state: {
-        pedidos: [],
+        articulos_pedidos: [],
         articulos: [],
         pagina_siguiente: '',
         pagina_atras: ''

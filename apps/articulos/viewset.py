@@ -22,5 +22,9 @@ class ArticuloViewSet(viewsets.ModelViewSet):
             if self.request.GET.get('search') != '':
                 search = self.request.GET['search']
                 articulos = Articulo.objects.filter(descripcion__icontains=search)
+                if len(articulos) == 0:
+                    articulos = Articulo.objects.filter(marca__descripcion__icontains=search)
+                    if len(articulos) == 0:
+                        articulos = Articulo.objects.filter(rubro__descripcion__icontains=search)
         return articulos
 

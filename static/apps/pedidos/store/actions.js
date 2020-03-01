@@ -9,3 +9,7 @@ export const set_articulos = (context, url) => {
         context.commit('set_pagina_atras', response.data.previous);
     })
 }
+
+export const set_pedidos_articulos = (context, articulo) => {
+    context.commit('set_pedidos_articulos', articulo);
+}
