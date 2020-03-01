@@ -13,3 +13,7 @@ export const set_articulos = (context, url) => {
 export const set_pedidos_articulos = (context, articulo) => {
     context.commit('set_pedidos_articulos', articulo);
 }
+
+export const set_total = ({commit}, precio_compra) => {
+    commit('set_total', precio_compra);
+}

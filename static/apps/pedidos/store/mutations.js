@@ -16,3 +16,7 @@ export const set_pedidos_articulos = (state, payload) => {
     // cargar pedidos desde el form de articulos
     state.articulos_pedidos.push(payload); // agrego un articulo nuevo 
 }
+
+export const set_total = (state, payload) => {
+    state.total += parseFloat(payload);
+}

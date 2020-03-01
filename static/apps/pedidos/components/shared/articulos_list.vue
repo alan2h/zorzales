@@ -80,7 +80,7 @@ export default {
         }
     },
     methods: {
-          ...mapActions(['set_articulos', 'set_pedidos_articulos']),
+          ...mapActions(['set_articulos', 'set_pedidos_articulos', 'set_total']),
           hideModal() {
             this.$root.$emit('bv::hide::modal', 'modal-1', '#btnShow')
             },
@@ -101,6 +101,7 @@ export default {
                     total = parseFloat(articulo['precio_compra']) * parseFloat(cantidad);
                 }
                 articulo['total'] = total;
+                this.set_total(total);
                 this.set_pedidos_articulos(articulo);
             }
     },

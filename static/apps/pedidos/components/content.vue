@@ -2,12 +2,14 @@
           <div class="">   
             <search></search>
             <pedidos_list></pedidos_list>
+            <totales></totales>
           </div>
 </template>
 
 <script>
-import search from './search_pedidos.vue'
-import pedidos_list from './pedidos_list.vue'
+import search from './shared/search_pedidos.vue'
+import pedidos_list from './shared/pedidos_list.vue'
+import totales from './shared/totales.vue'
 
 export default {
     name: 'content_pedidos',
@@ -21,7 +23,8 @@ export default {
     },
     components: {
         search,
-        pedidos_list
+        pedidos_list,
+        totales
     }
 }
 </script>

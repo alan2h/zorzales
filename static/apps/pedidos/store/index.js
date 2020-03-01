@@ -13,7 +13,8 @@ export const store = new Vuex.Store({
         articulos_pedidos: [],
         articulos: [],
         pagina_siguiente: '',
-        pagina_atras: ''
+        pagina_atras: '',
+        total: 0.0
     },
     actions,
     mutations,
