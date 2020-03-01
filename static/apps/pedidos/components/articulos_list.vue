@@ -26,8 +26,14 @@
                         <template v-if="articulo.marca">
                             <td v-text="articulo.marca.descripcion"> </td>
                         </template>
+                        <template v-else>
+                            <td> -- </td>
+                        </template>
                         <template v-if="articulo.rubro">
                             <td v-text="articulo.rubro.descripcion"> </td>
+                        </template>
+                         <template v-else>
+                            <td> -- </td>
                         </template>
                         <td v-text="'$' + articulo.precio_compra" ></td>
                         <td v-text="'$' + articulo.precio_venta" ></td>
@@ -88,8 +94,13 @@ export default {
                 this.set_articulos('/articulos/api/?search=' + this.search);
             },
             seleccionar(articulo){
-                var cantidad = prompt("Ingrese la cantidad", "");
+                var cantidad = prompt("Ingrese la cantidad", "1");
                 articulo['cantidad'] = cantidad;
+                var total = 0.0;
+                if (articulo['precio_compra']){
+                    total = parseFloat(articulo['precio_compra']) * parseFloat(cantidad);
+                }
+                articulo['total'] = total;
                 this.set_pedidos_articulos(articulo);
             }
     },
