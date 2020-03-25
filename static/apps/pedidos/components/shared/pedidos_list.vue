@@ -29,12 +29,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="pedido in get_articulos_pedidos" :key="pedido.id">
+                <tr v-for="(pedido, index) in get_articulos_pedidos" :key="pedido.id">
                     <th scope="row" v-text="pedido.cantidad"></th>
                     <td v-text="pedido.descripcion"></td>
                     <td v-text="'$' + pedido.precio_compra"></td>
                     <td v-text="'$' + pedido.total"></td>
-                    <td><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                    <td><button @click="delete_pedidos_articulos(index)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
                 </tr>
                 </tbody>
             </table>
@@ -44,13 +44,16 @@
 
 <script>
 
-import {mapGetters} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
 
 export default {
     data(){
         return{
 
         }
+    },
+    methods: {
+        ...mapActions(['delete_pedidos_articulos'])
     },
     computed: {
         ...mapGetters(['get_articulos_pedidos'])

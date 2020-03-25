@@ -31,7 +31,7 @@
             <div class="form-group">
               <div class="col-md-9 col-sm-9  offset-md-3">
                 <a  href="#" type="button" class="btn btn-primary">Cancelar</a>
-                <button type="button" class="btn btn-success">Guardar</button>
+                <button @click="guardar" type="button" class="btn btn-success">Guardar</button>
               </div>
             </div>
 
@@ -41,7 +41,9 @@
 
 <script>
 
-import {mapGetters} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
+import {config} from '../../../../libs/globals_conf.js'
+import axios from 'axios'
 
 export default {
     data(){
@@ -49,8 +51,47 @@ export default {
             total: 0.0
         }
     },
+    methods: {
+        ...mapActions(['delete_pedidos_articulos_all', 'set_message']),
+        /*
+            {
+                "fecha": null,
+                "precio_compra": null,
+                "observacion": "",
+                "baja": false,
+                "fecha_baja": null,
+                "articulos": []
+            }
+        */
+       guardar(){
+           
+           let fecha = this.get_fecha
+           let precio_compra = this.get_total
+           let articulos = []
+            for (var x=0; x < this.get_articulos_pedidos.length; x++){
+                articulos.push(this.get_articulos_pedidos[x].id)
+            }
+            let pedido = {
+               fecha: fecha,
+               precio_compra: precio_compra,
+               articulos: articulos
+            }
+
+              axios.post('/pedidos/api/', pedido, config)
+                .then((response)  => {
+                   console.log(response)
+                   this.delete_pedidos_articulos_all();
+                   this.set_message({'status': 'success', 'text':'el pedido se guardo correctamente'})
+                })
+                .catch((error) => {
+                   console.log(error)
+                   this.set_message({'status':'error', 'text': 'Faltan datos'})
+                });
+        }
+    },
     computed:{
-        ...mapGetters(['get_total'])
+        ...mapGetters(['get_total', 'get_fecha', 'get_articulos_pedidos']),
+        
     },
     watch: {
         get_total(value){

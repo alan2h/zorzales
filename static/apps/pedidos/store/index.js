@@ -14,7 +14,9 @@ export const store = new Vuex.Store({
         articulos: [],
         pagina_siguiente: '',
         pagina_atras: '',
-        total: 0.0
+        total: 0.0,
+        fecha: '',
+        message: {status: '', text: ''}
     },
     actions,
     mutations,

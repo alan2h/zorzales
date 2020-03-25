@@ -24,7 +24,8 @@
                 <label class="control-label col-md-3" for="first-name">Fecha <span class="required">*</span>
                 </label>
                 <div class="col-md-7">
-                    <input type="text" required="required" class="form-control col-md-12 ">
+                   <!-- <input type="text" required="required" class="form-control col-md-12 ">-->
+                       <date-picker @change="cambiarFecha" format="DD/MM/YYYY" v-model="fecha" :lang="lang" type="date"></date-picker>
                 </div>
             </div>
             <div class="form-group row">
@@ -46,15 +47,28 @@
 <script>
 
 import articulos_list from './articulos_list.vue'
+import DatePicker from 'vue2-datepicker';
+import 'vue2-datepicker/index.css';
+
+import {lang} from '../../../../libs/globals_conf.js'
+import {mapActions} from 'vuex'
 
 export default {
     data(){
         return{
-
+            lang: lang,
+            fecha: null
+        }
+    },
+    methods: {
+        ...mapActions(['set_fecha']),
+        cambiarFecha(){
+            this.set_fecha(this.fecha);
         }
     },
     components: {
-        articulos_list
+        articulos_list,
+        DatePicker
     }
 }
 </script>

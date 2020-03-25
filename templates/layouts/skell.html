@@ -209,6 +209,7 @@
                     </div>
                   {% endfor %}
               {% endif %}
+              {% csrf_token %}
              {% block content %}
 
              {% endblock %}
