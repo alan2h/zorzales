@@ -22,9 +22,12 @@ class Articulo(models.Model):
     blank=True, null=True)
     fecha_compra = models.DateTimeField(auto_created=True, blank=True, null=True)
 
+    referencia = models.CharField(max_length=300, blank=True, null=True)
+    para_venta = models.BooleanField(default=True, blank=True, null=True)
+
     # para realizar bajas
 
-    baja = models.BooleanField(default=False, null=True, blank=True)
+    baja = models.BooleanField(default=False, blank=True, null=True)
     fecha_baja = models.DateField(blank=True, null=True)
 
     def __str__(self):

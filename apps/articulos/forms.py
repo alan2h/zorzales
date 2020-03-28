@@ -19,6 +19,11 @@ class ArticuloForm(forms.ModelForm):
         'class': 'form-control'
     }))
 
+    referencia = forms.CharField(required=False, max_length=300, 
+    widget=forms.TextInput(attrs={
+        'class': 'form-control'
+    }))
+
     marca = forms.ModelChoiceField(required=False, queryset=Marca.objects.filter(baja=False), 
     widget=forms.Select(attrs={
         'class': 'form-control'
@@ -54,6 +59,12 @@ class ArticuloForm(forms.ModelForm):
     alicuota_iva = forms.IntegerField(required=False, widget=forms.NumberInput(attrs={
         'class': 'form-control'
     }))
+
+    para_venta = forms.BooleanField(required=False, initial=True, widget=forms.CheckboxInput(
+        attrs=({
+            'class': 'form-control'
+        })
+    ))
 
     class Meta:
         fields = '__all__'

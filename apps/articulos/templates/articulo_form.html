@@ -60,6 +60,24 @@
              <!-- controles -->
 
 
+               <!-- controles -->
+                <div class="form-group row ">
+                <label class="control-label col-md-3 col-sm-3 ">Referencia</label>
+                <div class="col-md-9 col-sm-9 ">
+                    {{ form.referencia }}
+                    <!-- error -->
+                        {% if form.referencia.errors %}
+                          <div class="alert alert-danger" role="alert">
+                            <p>{{ form.referencia.errors|striptags }}</p>
+                          </div>  
+                        {% endif %}
+                      <!-- error -->
+                </div>
+                
+                </div>
+             <!-- controles -->
+
+
               <!-- controles -->
                 <div class="form-group row ">
                 <label class="control-label col-md-3 col-sm-3 ">Marca</label>
@@ -199,6 +217,23 @@
                         {% if form.alicuota_iva.errors %}
                           <div class="alert alert-danger" role="alert">
                             <p>{{ form.alicuota_iva.errors|striptags }}</p>
+                          </div>  
+                        {% endif %}
+                      <!-- error -->
+                </div>
+                
+                </div>
+             <!-- controles -->
+
+              <!-- controles -->
+                <div class="form-group row ">
+                <label class="control-label col-md-3 col-sm-3 ">Para la venta</label>
+                <div class="col-md-9 col-sm-9 ">
+                    {{ form.para_venta }}
+                    <!-- error -->
+                        {% if form.para_venta.errors %}
+                          <div class="alert alert-danger" role="alert">
+                            <p>{{ form.para_venta.errors|striptags }}</p>
                           </div>  
                         {% endif %}
                       <!-- error -->
