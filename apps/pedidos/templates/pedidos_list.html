@@ -45,8 +45,8 @@
                           <th scope="row">{{ pedido.id }}</th>
                           <td>{{ pedido.fecha }}</td>
                           <td>
-                            {% for articulo in pedido.articulos.all %}
-                              {{ articulo.descripcion }} --
+                            {% for articulo in pedido.pedido_articulo.all %}
+                             ( cantidad: {{ articulo.cantidad }}  -- artículo: {{ articulo.articulo.descripcion }} ),
                             {% endfor %}
                           </td>
                           <td>{{ pedido.precio_compra }}</td>

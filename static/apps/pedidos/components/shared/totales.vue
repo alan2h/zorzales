@@ -69,7 +69,14 @@ export default {
            let precio_compra = this.get_total
            let articulos = []
             for (var x=0; x < this.get_articulos_pedidos.length; x++){
-                articulos.push(this.get_articulos_pedidos[x].id)
+                console.log(this.get_articulos_pedidos[x])
+                /* armo un array de los articulos y sus respectivas cantidades */
+                articulos.push(
+                    {
+                        'id': this.get_articulos_pedidos[x].id,
+                        'cantidad': this.get_articulos_pedidos[x].cantidad
+                    }
+                )
             }
             let pedido = {
                fecha: fecha,
@@ -77,7 +84,7 @@ export default {
                articulos: articulos
             }
 
-              axios.post('/pedidos/api/', pedido, config)
+             axios.post('/pedidos/api/', pedido, config)
                 .then((response)  => {
                    console.log(response)
                    this.delete_pedidos_articulos_all();
@@ -86,7 +93,7 @@ export default {
                 .catch((error) => {
                    console.log(error)
                    this.set_message({'status':'error', 'text': 'Faltan datos'})
-                });
+                }); 
         }
     },
     computed:{

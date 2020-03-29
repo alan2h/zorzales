@@ -8,6 +8,7 @@ from . import viewsets
 
 router = routers.DefaultRouter()
 router.register(r'api', viewsets.PedidoViewSet)
+router.register(r'articulos/api', viewsets.PedidoArticuloViewSet)
 
 
 urlpatterns = [
