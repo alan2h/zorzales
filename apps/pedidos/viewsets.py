@@ -20,8 +20,14 @@ class PedidoViewSet(viewsets.ModelViewSet):
         {'fecha': '2020-03-04', 'precio_compra': 73, 
         'articulos': [{'id': 15, 'cantidad': '3'}, {'id': 17, 'cantidad': '4'}]}
         '''
+        fecha = request.data['fecha']
+        if '/' in request.data['fecha']:
+            fecha = request.data['fecha'].split('/')[2] + '-' + \
+            request.data['fecha'].split('/')[1] + '-' + \
+                 request.data['fecha'].split('/')[0]
+
         results_pedido = Pedido(
-            fecha=request.data['fecha'], 
+            fecha=fecha, 
             precio_compra=request.data['precio_compra'],
         )
 

@@ -22,3 +22,4 @@ class PedidoListView(ListView):
 
     template_name = 'pedidos_list.html'
     queryset = Pedido.objects.all()
+    paginate_by = 10

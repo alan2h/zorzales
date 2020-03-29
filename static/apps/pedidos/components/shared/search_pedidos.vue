@@ -57,7 +57,7 @@ export default {
     data(){
         return{
             lang: lang,
-            fecha: null
+            fecha: new Date()
         }
     },
     methods: {
@@ -65,6 +65,9 @@ export default {
         cambiarFecha(){
             this.set_fecha(this.fecha);
         }
+    },
+    mounted(){
+        this.set_fecha(this.fecha);
     },
     components: {
         articulos_list,
