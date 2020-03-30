@@ -95,14 +95,16 @@ export default {
             },
             seleccionar(articulo){
                 var cantidad = prompt("Ingrese la cantidad", "1");
-                articulo['cantidad'] = cantidad;
-                var total = 0.0;
-                if (articulo['precio_compra']){
-                    total = parseFloat(articulo['precio_compra']) * parseFloat(cantidad);
+                if (cantidad){
+                    articulo['cantidad'] = cantidad;
+                    var total = 0.0;
+                    if (articulo['precio_compra']){
+                        total = parseFloat(articulo['precio_compra']) * parseFloat(cantidad);
+                    }
+                    articulo['total'] = total;
+                    this.set_total(total);
+                    this.set_pedidos_articulos(articulo);
                 }
-                articulo['total'] = total;
-                this.set_total(total);
-                this.set_pedidos_articulos(articulo);
             }
     },
      mounted(){

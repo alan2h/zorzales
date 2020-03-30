@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    
+
+    <div class="col-md-12">
+      <div class="x_panel">
+          
+        <h2> Lista de Pedidos </h2>
+          
+         
+        <div class="x_content">
+          <!-- buscador de listado -->
+          <div class="title_right">
+            <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+              <form method="GET" >
+                <div class="input-group">
+                    <input name="search" type="text" class="form-control" placeholder="Buscar por ...">
+                    <span class="input-group-btn">
+                      <button type="submit" class="btn btn-default">Aceptar</button>
+                    </span>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- buscador de listado /articulos/imprimir/pdf/-->
+          <br />
+         
+         <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Fecha</th>
+                          <th>Artículos</th>
+                          <th>Monto</th>
+                          <th>Comprar</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for pedido in object_list %}
+                        <tr>
+                          <th scope="row">{{ pedido.id }}</th>
+                          <td>{{ pedido.fecha }}</td>
+                          <td>
+                            {% for articulo in pedido.pedido_articulo.all %}
+                              cantidad: {{ articulo.cantidad }}  -- artículo: {{ articulo.articulo.descripcion }}<br>
+                            {% endfor %}
+                          </td>
+                          <td>$ {{ pedido.precio_compra }}</td>
+                          <td><button class="btn btn-info"><i class="fa fa-plus"></i></button></td>
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+                    </table>
+
+                     <nav aria-label="Page navigation example">
+                      <span class="current">
+                                  Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                                </span>
+                            <ul class="pagination justify-content-end">
+
+                                {% if page_obj.has_previous %}
+                                  <li   class="page-item">
+                                      <a class="page-link" href="?page=1" tabindex="-1"> &laquo;Primera </a>
+                                  </li>
+                                   <li   class="page-item">
+                                      <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Atrás</a>
+                                  </li>
+
+                                 {% endif %}
+
+                               
+
+                                {% if page_obj.has_next %}
+
+                                 <li class="page-item">
+                                    <a class="page-link"  href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+                                  </li>
+                                  
+                                  <li class="page-item">
+                                    <a class="page-link"  href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
+                                  </li>
+                                
+                                
+                                {% endif %}
+
+
+                            </ul>
+                        </nav>
+
+
+        </div>
+      </div>
+    </div>
+
+
+   
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+{% endblock %}

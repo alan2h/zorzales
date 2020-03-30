@@ -6,6 +6,9 @@ from .models import Articulo
 from apps.complementos.articulos.marcas.models import Marca
 from apps.complementos.articulos.rubros.models import Rubro
 
+# sectores
+from apps.sectores.models import Sector
+
 
 class ArticuloForm(forms.ModelForm):
 
@@ -15,6 +18,11 @@ class ArticuloForm(forms.ModelForm):
     }))
 
     descripcion = forms.CharField(required=True, max_length=800, 
+    widget=forms.TextInput(attrs={
+        'class': 'form-control'
+    }))
+
+    referencia = forms.CharField(required=False, max_length=300, 
     widget=forms.TextInput(attrs={
         'class': 'form-control'
     }))
@@ -52,6 +60,17 @@ class ArticuloForm(forms.ModelForm):
     }))
 
     alicuota_iva = forms.IntegerField(required=False, widget=forms.NumberInput(attrs={
+        'class': 'form-control'
+    }))
+
+    para_venta = forms.BooleanField(required=False, initial=True, widget=forms.CheckboxInput(
+        attrs=({
+            'class': 'form-control'
+        })
+    ))
+
+    sector = forms.ModelChoiceField(required=True, queryset=Sector.objects.filter(baja=False),
+    widget=forms.Select(attrs={
         'class': 'form-control'
     }))
 

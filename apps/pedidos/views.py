@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from django.views.generic import View
+from django.views.generic import View, ListView
 from django.contrib import messages
 
 from .models import Pedido
@@ -16,3 +16,10 @@ class PedidoCreateView(View):
     def post(self, request, *args, **kwargs):
         print(self.request.POST)
         return False
+
+
+class PedidoListView(ListView):
+
+    template_name = 'pedidos_list.html'
+    queryset = Pedido.objects.all()
+    paginate_by = 10

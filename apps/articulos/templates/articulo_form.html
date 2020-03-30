@@ -60,6 +60,24 @@
              <!-- controles -->
 
 
+               <!-- controles -->
+                <div class="form-group row ">
+                <label class="control-label col-md-3 col-sm-3 ">Referencia</label>
+                <div class="col-md-9 col-sm-9 ">
+                    {{ form.referencia }}
+                    <!-- error -->
+                        {% if form.referencia.errors %}
+                          <div class="alert alert-danger" role="alert">
+                            <p>{{ form.referencia.errors|striptags }}</p>
+                          </div>  
+                        {% endif %}
+                      <!-- error -->
+                </div>
+                
+                </div>
+             <!-- controles -->
+
+
               <!-- controles -->
                 <div class="form-group row ">
                 <label class="control-label col-md-3 col-sm-3 ">Marca</label>
@@ -207,7 +225,48 @@
                 </div>
              <!-- controles -->
 
-          
+
+                <!-- controles -->
+                <div class="form-group row ">
+                <label class="control-label col-md-3 col-sm-3 ">Sector</label>
+                <div class="col-md-7 col-sm-7">
+                    {{ form.sector }}
+                    <!-- error -->
+                        {% if form.sector.errors %}
+                          <div class="alert alert-danger" role="alert">
+                            <p>{{ form.sector.errors|striptags }}</p>
+                          </div>  
+                        {% endif %}
+                      <!-- error -->
+                </div>
+                  <!-- controles adicionales  -->
+                    <div class="col-md-1 col-sm-1">
+                      <button onclick="abrirSector()" class="btn btn-info"><i class="fa fa-plus"></i></button>
+                    </div>
+                  <!-- controles adicionales  -->
+                </div>
+             <!-- controles -->
+
+
+
+              <!-- controles -->
+                <div class="form-group row ">
+                <label class="control-label col-md-3 col-sm-3 ">Para la venta</label>
+                <div class="col-md-9 col-sm-9 ">
+                    {{ form.para_venta }}
+                    <!-- error -->
+                        {% if form.para_venta.errors %}
+                          <div class="alert alert-danger" role="alert">
+                            <p>{{ form.para_venta.errors|striptags }}</p>
+                          </div>  
+                        {% endif %}
+                      <!-- error -->
+                </div>
+                
+                </div>
+             <!-- controles -->
+
+
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-9 col-sm-9  offset-md-3">
@@ -287,12 +346,44 @@
 </div>  
   <!-- modal de carga de rubros  -->
 
+<!-- modal de carga de sectores  -->
+<div class="modal fade" id="id_form_modal_sectores" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Cargar Sector</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <div class="form-group">
+          <label for="">Descripción</label>
+          <input type="text" class="form-control" name="descripcion_sector" id="id_descripcion_sector" aria-describedby="helpId" placeholder="">
+          <small id="helpId" class="form-text text-muted">Ingrese el sector aquí</small>
+            <!-- error  message -->
+              <div id="id_mensaje_error_sector" class="alert alert-danger" role="alert">
+                <p>Error de carga, verifique el dato ingresado</p>
+              </div>  
+            <!-- error -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button onclick="guadarSector()" type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>  
+  <!-- modal de carga de sectores  -->
+
 {% endblock %}
 
 {% block extra_js %}
   <script>
      $('#id_mensaje_error_marca').hide();
      $('#id_mensaje_error_rubro').hide();
+     $('#id_mensaje_error_sector').hide();
 
    /* ------------- complemento marca ----------- */
    
@@ -354,5 +445,38 @@
       })
     }
     /* ------------- complemento rubro ----------- */
+
+
+     /* ------------- complemento sector ----------- */
+    function abrirSector(){
+      $('#id_form_modal_sectores').modal('show');
+    }
+     function guadarSector(){
+      $.ajax({
+        url: '/articulos/complementos/sector/alta',
+        type: 'post',
+        data: {
+          'descripcion': $('#id_descripcion_sector').val(),
+          'csrfmiddlewaretoken': '{{ csrf_token }}'
+        },
+        success : function(data){
+          if (data.status == '200'){
+            $('#id_mensaje_error_sector').hide();
+            $('#id_sector').append($('<option>',{
+              value: data.id,
+              text: $('#id_descripcion_sector').val()
+            }));
+            $('#id_form_modal_sector').modal('hide');
+             $('#id_sector').val(data.id);
+             $('#id_descripcion_sector').val('');
+          }else{
+            $('#id_mensaje_error_sector').show();
+          }
+        }
+      })
+    }
+    /* ------------- complemento sector ----------- */
+
+
   </script>
 {% endblock %}

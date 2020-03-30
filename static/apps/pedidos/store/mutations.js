@@ -20,3 +20,22 @@ export const set_pedidos_articulos = (state, payload) => {
 export const set_total = (state, payload) => {
     state.total += parseFloat(payload);
 }
+
+export const delete_pedidos_articulos = (state, payload) => {
+    state.total -= state.articulos_pedidos[payload].total
+    state.articulos_pedidos.splice(payload, 1);
+}
+
+export const delete_pedidos_articulos_all = (state) => {
+    state.total = 0.0;
+    state.articulos_pedidos = [];
+}
+
+export const set_fecha = (state, payload) => {
+    state.fecha = payload;
+}
+
+export const set_message = (state, payload) => {
+    state.message.status = payload.status;
+    state.message.text = payload.text;
+}

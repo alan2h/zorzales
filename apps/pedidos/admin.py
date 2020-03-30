@@ -1,6 +1,14 @@
 from django.contrib import admin
 
-from .models import Pedido
+from .models import Pedido, PedidoArticulo
+
+
+class PedidoArticuloAdmin(admin.ModelAdmin):
+
+    list_display = [
+        'articulo',
+        'cantidad'
+    ]
 
 
 class PedidoAdmin(admin.ModelAdmin):
@@ -13,3 +21,4 @@ class PedidoAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Pedido, PedidoAdmin)
+admin.site.register(PedidoArticulo, PedidoArticuloAdmin)

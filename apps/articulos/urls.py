@@ -20,6 +20,8 @@ urlpatterns = [
     path('eliminar/<int:pk>', ArticuloDeleteView.as_view(), name='ArticuloDeleteView'),
     path('detalle/<int:pk>', ArticuloDetailView.as_view(), name='ArticuloDetailView'),
     path('imprimir/pdf/',ArticuloReportePDF.as_view(), name="ArticuloReportePDF"),
+
     path('complementos/marca/alta', helpers.guardar_marca, name='guardar_marca'),
     path('complementos/rubro/alta', helpers.guardar_rubro, name='guardar_rubro'),
+    path('complementos/sector/alta', helpers.guardar_sector, name='guardar_sector'),
 ]
