@@ -4,6 +4,9 @@ from django.db import models
 from apps.complementos.articulos.marcas.models import Marca
 from apps.complementos.articulos.rubros.models import Rubro
 
+# sectores --> representa en que lugar se encuentra el articulo
+from apps.sectores.models import Sector
+
 
 class Articulo(models.Model):
 
@@ -22,8 +25,11 @@ class Articulo(models.Model):
     blank=True, null=True)
     fecha_compra = models.DateTimeField(auto_created=True, blank=True, null=True)
 
-    referencia = models.CharField(max_length=300, blank=True, null=True)
-    para_venta = models.BooleanField(default=True, blank=True, null=True)
+    referencia = models.CharField(max_length=300, blank=True, null=True) # campo de tipo observacion
+    para_venta = models.BooleanField(default=True, blank=True, null=True) # si tiene tildado es para venderlo
+    #, caso contrario es solo inventario
+
+    sector = models.ForeignKey(Sector, null=True, blank=True, on_delete=models.CASCADE) # a que sector pertenece el articulo
 
     # para realizar bajas
 

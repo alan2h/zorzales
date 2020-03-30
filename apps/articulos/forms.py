@@ -6,6 +6,9 @@ from .models import Articulo
 from apps.complementos.articulos.marcas.models import Marca
 from apps.complementos.articulos.rubros.models import Rubro
 
+# sectores
+from apps.sectores.models import Sector
+
 
 class ArticuloForm(forms.ModelForm):
 
@@ -65,6 +68,11 @@ class ArticuloForm(forms.ModelForm):
             'class': 'form-control'
         })
     ))
+
+    sector = forms.ModelChoiceField(required=True, queryset=Sector.objects.filter(baja=False),
+    widget=forms.Select(attrs={
+        'class': 'form-control'
+    }))
 
     class Meta:
         fields = '__all__'
