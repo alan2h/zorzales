@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block content %}
+<div id="app">
+    <content_component></content_component>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'dist/js/reservas.js' %}"></script>
+{% endblock %}

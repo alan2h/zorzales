@@ -3,6 +3,13 @@ from django.db import models
 from apps.articulos.models import Articulo
 
 
+choices_alquiler = (
+    ('DISPONIBLE', 'DISPONIBLE'),
+    ('OCUPADO', 'OCUPADO'),
+    ('RESERVADO', 'RESERVADO'),
+)
+
+
 class Inventario(models.Model):
 
     cantidad = models.IntegerField(null=False, blank=False)
@@ -24,6 +31,8 @@ class Alquiler(models.Model):
     inventario = models.ManyToManyField(Inventario, blank=True)
     precio = models.DecimalField(decimal_places=2, max_digits=11, null=True, blank=True)
     habitacion = models.IntegerField(null=True, blank=True)
+    estado = models.CharField(choices=choices_alquiler, max_length=300, 
+    null=True, blank=True, default='DISPONIBLE')
 
     def __str__(self):
         return str(self.descripcion)

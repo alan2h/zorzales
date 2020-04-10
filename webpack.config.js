@@ -6,6 +6,7 @@ module.exports = {
     mode: "development",
     entry : {
       pedidos: './static/apps/pedidos/index.js',
+      reservas: './static/apps/reservas/index.js',
     },
     // salidas de mis js
     output: {

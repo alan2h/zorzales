@@ -30,6 +30,7 @@ urlpatterns = [
     path('clientes/', include('apps.clientes.urls')),
     path('articulos/', include('apps.articulos.urls')),
     path('pedidos/', include('apps.pedidos.urls')),
+    path('reservas/', include('apps.reservas.urls')),
     # complementos
     path('complementos/marcas/', include('apps.complementos.articulos.marcas.urls')),
     path('complementos/rubros/', include('apps.complementos.articulos.rubros.urls')),
