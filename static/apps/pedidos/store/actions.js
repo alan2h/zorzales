@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-import {pad} from '../../../libs/functions.js'
+import {pad} from '@/libs/functions.js'
 
 export const set_articulos = (context, url) => {
     axios.get(url)

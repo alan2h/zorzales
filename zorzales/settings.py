@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'drf_yasg',
     #complementos
     'apps.complementos.articulos.rubros',
     'apps.complementos.articulos.marcas',
@@ -50,7 +51,8 @@ INSTALLED_APPS = [
     'apps.proveedores',
     'apps.pedidos',
     'apps.sectores',
-    'apps.alquileres',
+    'apps.cabanias',
+    'apps.alquileres', # esta app no se usa .- se debe remover con tiempo
     'apps.reservas',
 ]
 
@@ -118,6 +120,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
 
 
 # Internationalization

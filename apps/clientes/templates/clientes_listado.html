@@ -38,6 +38,7 @@
                 <th>#</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
+                <th>Documento</th>
                 <th>Fecha de Nacimiento</th>
                 <th>Email</th>
                 <th>Teléfono</th>
@@ -52,6 +53,7 @@
                   <th scope="row">{{ cliente.id  }}</th>
                   <td>{{ cliente.nombre }}</td>
                   <td>{{ cliente.apellido }}</td>
+                  <td>{{ cliente.numero_documento|default_if_none:'-' }}</td>
                   <td>{{ cliente.fecha_nacimiento }}</td>
                   <td>{% if cliente.email %}{{ cliente.email }}{% else %} -- {% endif %}</td>
                   <td>{% if cliente.telefono %}{{ cliente.telefono }}{% else %} -- {% endif %}</td>

@@ -57,6 +57,22 @@
              <!-- controles -->
 
              <!-- controles -->
+              <div class="form-group row ">
+                <label class="control-label col-md-3 col-sm-3 ">Documento</label>
+                <div class="col-md-9 col-sm-9 ">
+                    {{ form.numero_documento }}
+                     <!-- error -->
+                        {% if form.numero_documento.errors %}
+                          <div class="alert alert-danger" role="alert">
+                            <p>{{ form.numero_documento.errors|striptags }}</p>
+                          </div>  
+                        {% endif %}
+                      <!-- error -->
+                </div>
+                </div>
+             <!-- controles -->
+
+             <!-- controles -->
              <div class="form-group row ">
                 <label class="control-label col-md-3 col-sm-3 ">Fecha de Nacimiento</label>
                 <div class="col-md-9 col-sm-9 ">

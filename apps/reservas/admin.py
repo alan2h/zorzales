@@ -8,7 +8,7 @@ class ReservaAdmin(admin.ModelAdmin):
     list_display = [
         'fecha_ingreso',
         'cliente',
-        'alquiler'
+        'cabania'
     ]
 
 admin.site.register(Reserva, ReservaAdmin)
