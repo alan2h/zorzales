@@ -26,7 +26,7 @@
                                   <label class="col-form-label col-md-3 col-sm-3 label-align" >Cabañas <span class="required">*</span>
                                   </label>
                                   <div class="col-md-6 col-sm-6 ">
-                                    <select class="form-control">
+                                    <select v-model="reserva.cabania" class="form-control">
                                       <template v-for="cabania in get_cabanias">
                                         <option :key="cabania.id" :value="cabania.id">{{ cabania.descripcion }}</option>
                                       </template>
@@ -40,7 +40,7 @@
                                   <label class="col-form-label col-md-3 col-sm-3 label-align" >Clientes <span class="required">*</span>
                                   </label>
                                   <div class="col-md-6 col-sm-6 ">
-                                    <input class="form-control" disabled>
+                                    <input v-model="cliente_datos" class="form-control" disabled>
                                   </div>
                                   <b-button v-b-modal.modalPopover>Buscar cliente</b-button>
                               </div>
@@ -51,7 +51,7 @@
                                   <label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha de ingreso <span class="required">*</span>
                                   </label>
                                   <div class="col-md-6 col-sm-6 ">
-                                    <input class="form-control">
+                                    <date-picker @change="formato_fecha_ingreso" format="DD/MM/YYYY" v-model="fecha_ingreso" :lang="lang" type="date"></date-picker>
                                   </div>
                               </div>
                             <!-- controles -->
@@ -61,7 +61,7 @@
                                   <label class="col-form-label col-md-3 col-sm-3 label-align" >Hora de ingreso 
                                   </label>
                                   <div class="col-md-6 col-sm-6 ">
-                                    <input class="form-control">
+                                    <date-picker v-model="reserva.hora_ingreso" :lang="lang" type="time"></date-picker>
                                   </div>
                               </div>
                             <!-- controles -->
@@ -71,7 +71,7 @@
                                   <label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha de salida 
                                   </label>
                                   <div class="col-md-6 col-sm-6 ">
-                                    <input class="form-control">
+                                    <date-picker format="DD/MM/YYYY" v-model="reserva.fecha_salida" :lang="lang" type="date"></date-picker>
                                   </div>
                               </div>
                             <!-- controles -->
@@ -81,7 +81,7 @@
                                   <label class="col-form-label col-md-3 col-sm-3 label-align" >Hora de salida 
                                   </label>
                                   <div class="col-md-6 col-sm-6 ">
-                                    <input class="form-control">
+                                    <date-picker v-model="reserva.hora_salida" :lang="lang" type="time"></date-picker>
                                   </div>
                               </div>
                             <!-- controles -->
@@ -91,7 +91,7 @@
                                   <label class="col-form-label col-md-3 col-sm-3 label-align" >Observación 
                                   </label>
                                   <div class="col-md-6 col-sm-6 ">
-                                    <textarea class="form-control"></textarea>
+                                    <textarea v-model="reserva.observacion" class="form-control"></textarea>
                                   </div>
                               </div>
                             <!-- controles -->
@@ -110,7 +110,7 @@
                   </div>
                 </div>
               </div>
-              <clientes_list></clientes_list>
+              <clientes_list @selected="select"></clientes_list>
             </div>
 
 </template>
@@ -153,15 +153,44 @@
 import {mapActions, mapGetters} from 'vuex'
 
 import clientes_list from './clientes_list.vue'
+import DatePicker from 'vue2-datepicker';
+import 'vue2-datepicker/index.css';
+
+import {lang} from '@/libs/globals_conf.js'
+import {pad} from '@/libs/functions.js'
 
 export default {
     data(){
         return{
-            
+            cliente_datos: '',
+            lang: lang,
+            fecha_ingreso: null,
+            reserva: {
+              cabania: '',
+              cliente: '',
+              fecha_ingreso: null,
+              hora_ingreso: null,
+              fecha_salida: null,
+              hora_salida: null,
+              observacion: ''
+            }
         }
     },
     methods: {
-      ...mapActions(['set_cabanias'])
+      ...mapActions(['set_cabanias']),
+      select(cliente){
+
+        this.cliente_datos = cliente.nombre + ' ' + cliente.apellido;
+        if (cliente.numero_documento){
+          this.cliente_datos += ' ' + cliente.numero_documento
+        }
+        this.reserva.cliente = cliente.id;
+      },
+      formato_fecha_ingreso(){
+        this.reserva.fecha_ingreso = pad(this.fecha_ingreso.getFullYear()) + '-' + pad(this.fecha_ingreso.getMonth() + 1) + '-' + pad(this.fecha_ingreso.getDate());
+        console.log(this.reserva);
+        
+      }
     },
     mounted(){
       this.set_cabanias();
@@ -170,7 +199,8 @@ export default {
       ...mapGetters(['get_cabanias'])
     },
     components: {
-      clientes_list
+      clientes_list,
+      DatePicker
     }
 }
 </script>

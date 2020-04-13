@@ -10,3 +10,13 @@ export const set_clientes = ({commit}) => {
         console.log(error);
     })
 }
+
+export const set_buscador = ({commit}, payload) => {
+    axios.get('/clientes/api/?buscador=' + payload)
+    .then((response) => {
+        commit('set_clientes', response.data)
+    })
+    .catch((error) => {
+        console.log(error);
+    })
+}
