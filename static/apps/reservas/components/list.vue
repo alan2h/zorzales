@@ -27,9 +27,7 @@
                   </div>
                 </div>
                 
-              </div>
-
-        
+          </div>
 
          <table class="table table-striped">
            
@@ -37,19 +35,31 @@
             <tr>
                 <th>#</th>
                 <th>Fecha de Ingreso</th>
-                <th>Fecha de Salida</th>
+                <th>Hora de Ingreso</th>
                 <th>Cliente</th>
                 <th>Cabaña</th>
+                <th>Anular</th>
             </tr>
             </thead>
             <tbody>
               <template v-for="reserva in get_reservas">
                 <tr :key="reserva.id">
                     <th scope="row">{{ reserva.id }}</th>
-                    <td>{{ reserva.fecha_ingreso|format_date }}</td>
-                    <td>{{ reserva.fecha_salida|format_date }}</td>
+                    <template v-if="reserva.fecha_ingreso">
+                      <td>{{ reserva.fecha_ingreso|format_date }}</td>
+                    </template>
+                    <template v-else>
+                      <td>--</td>
+                    </template>
+                    <template v-if="reserva.hora_ingreso">
+                    <td>{{ reserva.hora_ingreso }}</td>
+                    </template>
+                    <template v-else>
+                      <td>--</td>
+                    </template>
                     <td>{{ reserva.cliente.nombre }} {{ reserva.cliente.apellido }}</td>
                     <td>{{ reserva.cabania.descripcion }}</td>
+                    <td> <button class="btn btn-danger"><i class="fa fa-ban"></i></button> </td>
                 </tr>
               </template>
             </tbody>
@@ -60,7 +70,7 @@
 <script>
 
 import {mapActions, mapGetters} from 'vuex'
-import {format_date} from '@/libs/filters.js'
+import {format_date, format_} from '@/libs/filters.js'
 
 export default {
     data(){

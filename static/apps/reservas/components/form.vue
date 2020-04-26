@@ -19,7 +19,7 @@
                   </div>
                   <div class="x_content">
                     <br />
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                    <form id="demo-form2" data-parsley-validate @submit.prevent="guardar" class="form-horizontal form-label-left">
                             
                             <!-- controles -->
                               <div class="item form-group">
@@ -31,6 +31,11 @@
                                         <option :key="cabania.id" :value="cabania.id">{{ cabania.descripcion }}</option>
                                       </template>
                                     </select>
+                                    <template v-if="get_errores">
+                                        <span v-if="get_errores.includes('cabania')" class="help-block" role="alert">
+                                          Campo requerido
+                                        </span>
+                                    </template>
                                   </div>
                               </div>
                             <!-- controles -->
@@ -41,7 +46,13 @@
                                   </label>
                                   <div class="col-md-6 col-sm-6 ">
                                     <input v-model="cliente_datos" class="form-control" disabled>
+                                     <template v-if="get_errores">
+                                        <span v-if="get_errores.includes('cliente')" class="help-block" role="alert">
+                                          Campo requerido
+                                        </span>
+                                    </template>
                                   </div>
+
                                   <b-button v-b-modal.modalPopover>Buscar cliente</b-button>
                               </div>
                             <!-- controles -->
@@ -52,6 +63,11 @@
                                   </label>
                                   <div class="col-md-6 col-sm-6 ">
                                     <date-picker @change="formato_fecha_ingreso" format="DD/MM/YYYY" v-model="fecha_ingreso" :lang="lang" type="date"></date-picker>
+                                    <template v-if="get_errores">
+                                        <span v-if="get_errores.includes('fecha_ingreso')" class="help-block" role="alert">
+                                          Campo requerido
+                                        </span>
+                                    </template>
                                   </div>
                               </div>
                             <!-- controles -->
@@ -62,26 +78,26 @@
                                   </label>
                                   <div class="col-md-6 col-sm-6 ">
                                     <date-picker v-model="reserva.hora_ingreso" :lang="lang" type="time"></date-picker>
-                                  </div>
-                              </div>
-                            <!-- controles -->
-
-                             <!-- controles -->
-                              <div class="item form-group">
-                                  <label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha de salida 
-                                  </label>
-                                  <div class="col-md-6 col-sm-6 ">
-                                    <date-picker format="DD/MM/YYYY" v-model="reserva.fecha_salida" :lang="lang" type="date"></date-picker>
+                                     <template v-if="get_errores">
+                                        <span v-if="get_errores.includes('hora_ingreso')" class="help-block" role="alert">
+                                          Campo requerido
+                                        </span>
+                                    </template>
                                   </div>
                               </div>
                             <!-- controles -->
 
                             <!-- controles -->
                               <div class="item form-group">
-                                  <label class="col-form-label col-md-3 col-sm-3 label-align" >Hora de salida 
+                                  <label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha de salida <span class="required">*</span>
                                   </label>
                                   <div class="col-md-6 col-sm-6 ">
-                                    <date-picker v-model="reserva.hora_salida" :lang="lang" type="time"></date-picker>
+                                    <date-picker @change="formato_fecha_salida" format="DD/MM/YYYY" v-model="fecha_salida" :lang="lang" type="date"></date-picker>
+                                    <template v-if="get_errores">
+                                        <span v-if="get_errores.includes('fecha_salida')" class="help-block" role="alert">
+                                          Campo requerido
+                                        </span>
+                                    </template>
                                   </div>
                               </div>
                             <!-- controles -->
@@ -150,11 +166,12 @@
 */
 
 
-import {mapActions, mapGetters} from 'vuex'
+import {mapActions, mapGetters, mapState} from 'vuex'
 
 import clientes_list from './clientes_list.vue'
 import DatePicker from 'vue2-datepicker';
 import 'vue2-datepicker/index.css';
+
 
 import {lang} from '@/libs/globals_conf.js'
 import {pad} from '@/libs/functions.js'
@@ -165,19 +182,19 @@ export default {
             cliente_datos: '',
             lang: lang,
             fecha_ingreso: null,
+            fecha_salida: null,
             reserva: {
               cabania: '',
               cliente: '',
               fecha_ingreso: null,
-              hora_ingreso: null,
               fecha_salida: null,
-              hora_salida: null,
+              hora_ingreso: null,
               observacion: ''
             }
         }
     },
     methods: {
-      ...mapActions(['set_cabanias']),
+      ...mapActions(['set_cabanias', 'set_reserva', 'set_message']),
       select(cliente){
 
         this.cliente_datos = cliente.nombre + ' ' + cliente.apellido;
@@ -187,20 +204,42 @@ export default {
         this.reserva.cliente = cliente.id;
       },
       formato_fecha_ingreso(){
-        this.reserva.fecha_ingreso = pad(this.fecha_ingreso.getFullYear()) + '-' + pad(this.fecha_ingreso.getMonth() + 1) + '-' + pad(this.fecha_ingreso.getDate());
-        console.log(this.reserva);
-        
+        this.reserva.fecha_ingreso = pad(this.fecha_ingreso.getFullYear()) + '-' + pad(this.fecha_ingreso.getMonth() + 1) + '-' + pad(this.fecha_ingreso.getDate());        
+      },
+      formato_fecha_salida(){
+        this.reserva.fecha_salida = pad(this.fecha_salida.getFullYear()) + '-' + pad(this.fecha_salida.getMonth() + 1) + '-' + pad(this.fecha_salida.getDate());        
+      },
+      guardar(){
+        this.set_reserva(this.reserva);
       }
     },
     mounted(){
       this.set_cabanias();
     },
     computed: { 
-      ...mapGetters(['get_cabanias'])
+      ...mapGetters(['get_cabanias', 'get_errores', 'get_message']),
+      ...mapState(['errores'])
     },
     components: {
       clientes_list,
       DatePicker
+    },
+    watch: {
+      get_message(value){
+        if (value == 'success'){
+          this.$swal.fire({
+            title: 'Sistema',
+            text: "Reserva realizada con éxito",
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+          }).then((result) => {
+            if (result.value) {
+              this.$router.push('/')
+            }
+          })
+          this.set_message('')
+        }
+      }
     }
 }
 </script>

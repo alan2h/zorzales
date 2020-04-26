@@ -12,7 +12,9 @@ Vue.use(vuex);
 
 const reservas = {
     state: {
-        reservas: []
+        reservas: [],
+        errores: [],
+        message: ''
     },
     actions,
     mutations,
