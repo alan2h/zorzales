@@ -7,6 +7,7 @@ module.exports = {
     entry : {
       pedidos: './static/apps/pedidos/index.js',
       reservas: './static/apps/reservas/index.js',
+      cabanias: './static/apps/cabanias/index.js',
     },
     // salidas de mis js
     output: {
@@ -70,7 +71,7 @@ module.exports = {
                 test: /\.(png|jpg|gif|svg)$/,
                 loader: 'file-loader',
                 options: {
-                  name: '[name].[ext]?[hash]'
+                  name: '[name].[ext]'
                 }
               }
         ]
