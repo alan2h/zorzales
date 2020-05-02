@@ -32,7 +32,7 @@
                                       </template>
                                     </select>
                                     <template v-if="get_errores">
-                                        <span v-if="get_errores.includes('cabania')" class="help-block" role="alert">
+                                        <span v-if="get_errores.includes('cabania')" style="color:red" class="help-block" role="alert">
                                           Campo requerido
                                         </span>
                                     </template>
@@ -47,7 +47,7 @@
                                   <div class="col-md-6 col-sm-6 ">
                                     <input v-model="cliente_datos" class="form-control" disabled>
                                      <template v-if="get_errores">
-                                        <span v-if="get_errores.includes('cliente')" class="help-block" role="alert">
+                                        <span v-if="get_errores.includes('cliente')" style="color:red" class="help-block" role="alert">
                                           Campo requerido
                                         </span>
                                     </template>
@@ -64,7 +64,7 @@
                                   <div class="col-md-6 col-sm-6 ">
                                     <date-picker @change="formato_fecha_ingreso" format="DD/MM/YYYY" v-model="fecha_ingreso" :lang="lang" type="date"></date-picker>
                                     <template v-if="get_errores">
-                                        <span v-if="get_errores.includes('fecha_ingreso')" class="help-block" role="alert">
+                                        <span v-if="get_errores.includes('fecha_ingreso')" style="color:red" class="help-block" role="alert">
                                           Campo requerido
                                         </span>
                                     </template>
@@ -79,7 +79,7 @@
                                   <div class="col-md-6 col-sm-6 ">
                                     <date-picker v-model="reserva.hora_ingreso" :lang="lang" type="time"></date-picker>
                                      <template v-if="get_errores">
-                                        <span v-if="get_errores.includes('hora_ingreso')" class="help-block" role="alert">
+                                        <span v-if="get_errores.includes('hora_ingreso')" style="color:red" class="help-block" role="alert">
                                           Campo requerido
                                         </span>
                                     </template>
@@ -94,7 +94,7 @@
                                   <div class="col-md-6 col-sm-6 ">
                                     <date-picker @change="formato_fecha_salida" format="DD/MM/YYYY" v-model="fecha_salida" :lang="lang" type="date"></date-picker>
                                     <template v-if="get_errores">
-                                        <span v-if="get_errores.includes('fecha_salida')" class="help-block" role="alert">
+                                        <span v-if="get_errores.includes('fecha_salida')" style="color:red" class="help-block" role="alert">
                                           Campo requerido
                                         </span>
                                     </template>

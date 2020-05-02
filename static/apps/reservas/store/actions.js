@@ -2,10 +2,12 @@ import axios from 'axios';
 
 import {config} from '@/libs/globals_conf.js'
 
-export const set_reservas = ({commit}) =>{
-    axios.get('/reservas/api/')
+export const set_reservas = ({commit}, url='/reservas/api/') =>{
+    axios.get(url)
     .then((response) => {
-        commit('set_reservas', response.data);
+        commit('set_reservas', response.data.results);
+        commit('set_pagina_siguiente_reservas', response.data.next);
+        commit('set_pagina_atras_reservas', response.data.previous);
     })
     .catch((error) => {
         console.log(error.response)

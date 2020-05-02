@@ -64,6 +64,18 @@
               </template>
             </tbody>
         </table>
+        
+
+          <nav aria-label="Page navigation conatiner"></nav>
+          <ul class="pagination justify-content-center">
+            <template v-if="get_pagina_atras_reservas">
+              <li><a @click="siguiente(get_pagina_atras_reservas)" href="#" class="page-link">&laquo; Atrás </a></li>
+            </template>
+            <template v-if="get_pagina_siguiente_reservas">
+              <li><a href="#" @click="atras(get_pagina_siguiente_reservas)" class="page-link"> Siguiente &raquo;</a></li>
+            </template>
+          </ul>
+
     </div>
 </template>
 
@@ -82,13 +94,19 @@ export default {
       ...mapActions(['set_reservas']),
       alta(){
         this.$router.push('/alta');
+      },
+      siguiente(url){
+        this.set_reservas(url)
+      },
+      atras(url){
+        this.set_reservas(url)
       }
     },
     mounted(){
       this.set_reservas();
     },
     computed: {
-      ...mapGetters(['get_reservas'])
+      ...mapGetters(['get_reservas', 'get_pagina_siguiente_reservas', 'get_pagina_atras_reservas'])
     },
     filters: {
       format_date

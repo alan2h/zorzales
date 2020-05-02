@@ -14,7 +14,9 @@ const reservas = {
     state: {
         reservas: [],
         errores: [],
-        message: ''
+        message: '',
+        pagina_siguiente_reservas: '',
+        pagina_atras_reservas: ''
     },
     actions,
     mutations,

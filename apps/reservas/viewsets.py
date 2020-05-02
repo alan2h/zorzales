@@ -7,6 +7,8 @@ from .models import Reserva
 from apps.clientes.models import Cliente
 from apps.cabanias.models import Cabania
 
+from apps.lib.api_rest import StandardResultsSetPagination
+
 
 class ReservaViewSet(viewsets.ModelViewSet):
 
@@ -17,6 +19,7 @@ class ReservaViewSet(viewsets.ModelViewSet):
 
     queryset = Reserva.objects.all()
     serializer_class = ReservaSerializer
+    pagination_class = StandardResultsSetPagination
 
     def create(self, request):
         '''
@@ -27,7 +30,6 @@ class ReservaViewSet(viewsets.ModelViewSet):
         'observacion': ''}
         '''
         errors = []
-        print(request.data)
 
         if request.data.get('cabania') == '':
             errors.append('cabania')

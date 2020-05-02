@@ -14,3 +14,11 @@ export const remove_errores = (state, payload) => {
 export const set_message = (state, payload ) => {
     state.message = payload;
 }
+
+export const set_pagina_siguiente_reservas = (state, payload) => {
+    state.pagina_siguiente_reservas = payload;
+}
+
+export const set_pagina_atras_reservas = (state, payload) => {
+    state.pagina_atras_reservas = payload;
+}
