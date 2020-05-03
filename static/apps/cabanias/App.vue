@@ -20,8 +20,8 @@
         <br />
             <div class="container">
                 <div class="row">
-                    <template v-for="cabania in get_cabanias">
-                        <cabania :key="cabania.id" :cabania="cabania"></cabania>
+                    <template v-for="cabania in get_reserva_result">
+                        <cabania :reserva="cabania.reserva" :key="cabania.id" :cabania="cabania"></cabania>
                     </template>
                 </div>
                 </div>
@@ -42,16 +42,16 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['set_cabanias'])
+        ...mapActions(['set_cabanias', 'set_reserva_unico']),
     },
     mounted(){
-        this.set_cabanias();
+        this.set_reserva_unico(1);
     },
     components: {
         cabania
     },
     computed: {
-        ...mapGetters(['get_cabanias'])
+        ...mapGetters(['get_cabanias', 'get_reserva_result'])
     }
 }
 </script>

@@ -32,3 +32,14 @@ export const set_reserva = ({commit}, payload) => {
 export const set_message = ({commit}, payload) => {
     commit('set_message', payload)
 }
+
+
+export const set_reserva_unico = ({commit}, payload) =>{
+    axios.get('/cabanias/api/' + payload + '/get_reserva/')
+    .then((response) => {
+        commit('set_reserva_result', response.data);
+    })
+    .catch((error) => {
+        console.log(error.response)
+    })
+}

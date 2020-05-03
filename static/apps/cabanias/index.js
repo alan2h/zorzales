@@ -4,11 +4,12 @@ import vuex from 'vuex';
 import App from './App.vue'
 
 import cabanias from '@/apps/cabanias/store'
+import reservas from '@/apps/reservas/store'
 
 Vue.use(vuex)
 
 const storer = new vuex.Store({
-  modules: {cabanias}
+  modules: {cabanias, reservas}
 })
 
 new Vue({

@@ -12,6 +12,8 @@ import content_reservas from './components/content.vue'
 
 // store
 import reservas from './store'
+import cabanias from '@/apps/cabanias/store'
+import clientes from '@/apps/clientes/store'
 
 // rutas
 import {routes} from './router'
@@ -26,7 +28,7 @@ const router = new VueRouter({
 })
 
 const storer = new vuex.Store({
-  modules: {reservas}
+  modules: {reservas, clientes, cabanias}
 })
 
 new Vue({

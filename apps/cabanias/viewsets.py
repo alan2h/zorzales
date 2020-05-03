@@ -1,5 +1,7 @@
 from datetime import date, timedelta
 
+from django.http import JsonResponse
+
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -26,32 +28,63 @@ class CabaniaViewSet(viewsets.ModelViewSet):
 
         '''
         reserva_result = []
+        result = []
         today = date.today()
-        reserva = Reserva.objects.filter(cabania__id=pk, fecha_ingreso=today)
-        if not reserva.exists():
-            reserva = Reserva.objects.filter(cabania__id=pk, fecha_ingreso__lt=today)
-            if reserva.exists():
-                for r in reserva:
-                    if r.fecha_salida >= today:
-                        reserva_result = r
-        else:
-            reserva_result = reserva.first()
-
-        if not reserva_result:
-            return Response({
-                'reserva': False,
-                'fecha_ingreso': '',
-                'hora_ingreso': '',
-                'dia_actual': today,
-                'cliente': '',
-                'fecha_salida': ''
-                })
-        else:
-            return Response({
-                'reserva': True,
-                'fecha_ingreso': reserva_result.fecha_ingreso,
-                'hora_ingreso': reserva_result.hora_ingreso,
-                'dia_actual': today,
-                'cliente': reserva_result.cliente.nombre + ' ' + reserva_result.cliente.apellido,
-                'fecha_salida': reserva_result.fecha_salida
-            })
+        cabanias = Cabania.objects.all()
+        i = 0
+        for cabania in cabanias:
+            pk = cabania.id
+            i += 1
+            reserva = Reserva.objects.filter(cabania__id=pk, fecha_ingreso=today)
+            if not reserva.exists():
+                reserva = Reserva.objects.filter(cabania__id=pk, fecha_ingreso__lt=today)
+                if reserva.exists():
+                    for r in reserva:
+                        if r.fecha_salida >= today:
+                            reserva_result = r
+                            result.append({
+                                'id':i,
+                                'reserva': True,
+                                'cabania': cabania.descripcion,
+                                'fecha_ingreso': reserva_result.fecha_ingreso,
+                                'hora_ingreso': reserva_result.hora_ingreso,
+                                'dia_actual': today,
+                                'cliente': reserva_result.cliente.nombre + ' ' + reserva_result.cliente.apellido,
+                                'fecha_salida': reserva_result.fecha_salida
+                            })
+                        else:
+                            result.append({
+                            'id': i,
+                            'reserva': False,
+                            'cabania': cabania.descripcion,
+                            'fecha_ingreso': '',
+                            'hora_ingreso': '',
+                            'dia_actual': today,
+                            'cliente': '',
+                            'fecha_salida': ''
+                            })
+                else:
+                    result.append({
+                        'id': i,
+                        'reserva': False,
+                        'fecha_ingreso': '',
+                        'cabania': cabania.descripcion,
+                        'hora_ingreso': '',
+                        'dia_actual': today,
+                        'cliente': '',
+                        'fecha_salida': ''
+                        })
+            else:
+                reserva_result = reserva.first()
+                result.append({
+                        'id':i,
+                        'reserva': True,
+                        'cabania': cabania.descripcion,
+                        'fecha_ingreso': reserva_result.fecha_ingreso,
+                        'hora_ingreso': reserva_result.hora_ingreso,
+                        'dia_actual': today,
+                        'cliente': reserva_result.cliente.nombre + ' ' + reserva_result.cliente.apellido,
+                        'fecha_salida': reserva_result.fecha_salida
+                    })
+        print(result)
+        return JsonResponse(result, safe=False)

@@ -22,3 +22,7 @@ export const set_pagina_siguiente_reservas = (state, payload) => {
 export const set_pagina_atras_reservas = (state, payload) => {
     state.pagina_atras_reservas = payload;
 }
+
+export const set_reserva_result = (state, payload) => {
+    state.reserva_result = payload;
+}
