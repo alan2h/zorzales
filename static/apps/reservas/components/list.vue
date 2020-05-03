@@ -20,7 +20,7 @@
                 <div class="col-md-5 col-sm-10 form-group row pull-right top_search">
              
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Ingrese la busqueda ...">
+                    <input v-model="texto_buscar" type="text" class="form-control" placeholder="Ingrese la busqueda ...">
                     <span class="input-group-btn">
                       <button class="btn btn-default" type="button">Aceptar</button>
                     </span>
@@ -87,7 +87,7 @@ import {format_date, format_} from '@/libs/filters.js'
 export default {
     data(){
         return{
-
+          texto_buscar: ''
         }
     },
     methods: {
@@ -100,7 +100,7 @@ export default {
       },
       atras(url){
         this.set_reservas(url)
-      }
+      },
     },
     mounted(){
       this.set_reservas();
@@ -110,6 +110,11 @@ export default {
     },
     filters: {
       format_date
+    },
+    watch: {
+      texto_buscar(value){
+        this.set_reservas('/reservas/api/' + '?buscador=' + value)
+      }
     }
 }
 </script>

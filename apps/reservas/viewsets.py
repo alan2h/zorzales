@@ -59,3 +59,15 @@ class ReservaViewSet(viewsets.ModelViewSet):
             return Response({'ok': '200'}, status=status.HTTP_201_CREATED)
         else:
             return Response(errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+    def get_queryset(self):
+        queryset = Reserva.objects.all()
+        if 'buscador' in self.request.query_params:
+            if self.request.query_params.get('buscador') != '':
+                queryset = Reserva.objects.filter(cliente__nombre__icontains=self.request.query_params.get('buscador'))
+                if len(queryset) == 0:
+                    queryset = Reserva.objects.filter(cliente__apellido__icontains=self.request.query_params.get('buscador'))
+                    if len(queryset) == 0:
+                        queryset = Reserva.objects.all()
+        return queryset
