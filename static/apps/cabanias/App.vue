@@ -20,9 +20,9 @@
         <br />
             <div class="container">
                 <div class="row">
-                    <cabania></cabania>
-                    <cabania></cabania>
-                    <cabania></cabania>
+                    <template v-for="cabania in get_cabanias">
+                        <cabania :key="cabania.id" :cabania="cabania"></cabania>
+                    </template>
                 </div>
                 </div>
         </div>
@@ -33,14 +33,25 @@
 
 import cabania from './components/cabania.vue'
 
+import {mapActions, mapGetters} from 'vuex'
+
 export default {
     data(){
         return{
             
         }
     },
+    methods: {
+        ...mapActions(['set_cabanias'])
+    },
+    mounted(){
+        this.set_cabanias();
+    },
     components: {
         cabania
+    },
+    computed: {
+        ...mapGetters(['get_cabanias'])
     }
 }
 </script>
