@@ -30,8 +30,8 @@
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-9 col-sm-9  offset-md-3">
-                <a  href="#" type="button" class="btn btn-primary">Cancelar</a>
-                <button @click="guardar" type="button" class="btn btn-success">Guardar</button>
+                <a  href="#" type="button" class="btn btn-secondary"><i class="fa fa-times"></i></a>
+                <button @click="guardar" type="button" class="btn btn-primary"><i class="fa fa-floppy-o"></i></button>
               </div>
             </div>
 

@@ -58,11 +58,11 @@
                         <div class="w-100">
                         <p class="float-left"></p>
                         <b-button
-                            variant="primary"
+                            variant="secondary"
                             size="sm"
                             class="float-right"
                             @click="hideModal">
-                        Cerrar
+                        <i class="fa fa-times"></i>
                         </b-button>
                     </div>
                 </template>
