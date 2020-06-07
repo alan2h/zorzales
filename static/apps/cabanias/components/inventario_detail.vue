@@ -16,7 +16,7 @@
                 <table v-if="get_inventarios_cabania.length > 0" class="table">
                 <thead>
                     <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">Código</th>
                     <th scope="col">Articulo</th>
                     <th scope="col">Cantidad</th>
                     </tr>
@@ -26,8 +26,8 @@
                      
                     <template v-for="inventario in get_inventarios_cabania">
                         <tr :key="inventario.id">
-                            <th scope="row">{{ inventario.id }}</th>
-                            <th>{{ inventario.articulo }}</th>
+                            <th>{{ inventario.articulo.codigo_barra }}</th>
+                            <th>{{ inventario.articulo.descripcion }}</th>
                             <td>{{ inventario.cantidad }}</td>
                         </tr>
                     </template>
@@ -36,7 +36,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i></button>
-                <button type="button" class="btn btn-primary"><i class="fa fa-print"></i></button>
+                <button v-if="get_inventarios_cabania.length > 0" type="button" class="btn btn-primary"><i class="fa fa-print"></i></button>
             </div>
             </div>
         </div>

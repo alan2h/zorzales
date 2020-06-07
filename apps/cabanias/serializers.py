@@ -2,8 +2,12 @@ from rest_framework import serializers
 
 from .models import Cabania, Inventario
 
+from apps.articulos.serializer import ArticuloSerializer
+
 
 class InventarioSerializer(serializers.ModelSerializer):
+
+    articulo = ArticuloSerializer()
 
     class Meta:
 
