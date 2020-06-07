@@ -38,6 +38,7 @@
                 <th>Hora de Ingreso</th>
                 <th>Cliente</th>
                 <th>Cabaña</th>
+                <th>Cobrar</th>
                 <th>Anular</th>
             </tr>
             </thead>
@@ -59,6 +60,7 @@
                     </template>
                     <td>{{ reserva.cliente.nombre }} {{ reserva.cliente.apellido }}</td>
                     <td>{{ reserva.cabania.descripcion }}</td>
+                    <td> <button @click="abrirCobranza(reserva.id)" class="btn btn-primary"><i class="fa fa-dollar"></i></button> </td>
                     <td> <button class="btn btn-danger"><i class="fa fa-ban"></i></button> </td>
                 </tr>
               </template>
@@ -101,6 +103,9 @@ export default {
       atras(url){
         this.set_reservas(url)
       },
+      abrirCobranza(reserva_id){
+        window.location.href = "/reservas/cobrar/" + reserva_id;
+      }
     },
     mounted(){
       this.set_reservas();

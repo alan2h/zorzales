@@ -20,3 +20,4 @@ class CobranzaAdmin(admin.ModelAdmin):
     ]
 
 admin.site.register(Reserva, ReservaAdmin)
+admin.site.register(Cobranza, CobranzaAdmin)

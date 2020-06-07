@@ -31,7 +31,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i></button>
-                    <button type="button" class="btn btn-primary"><i class="fa fa-usd"></i> </button>
+                    <button @click="abrirCobranza(reserva_open_detail.id)" type="button" class="btn btn-primary"><i class="fa fa-usd"></i> </button>
                 </div>
                 </div>
             </div>
@@ -50,6 +50,11 @@ export default {
     },
     mounted(){
         
+    },
+    methods: {
+        abrirCobranza(reserva_id){
+            window.location.href = '/reservas/cobrar/' + reserva_id
+        }
     },
     props: {
         reserva_open_detail:{ //<-- props get reserva 
