@@ -30,8 +30,8 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Cobrar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                <button type="button" class="btn btn-primary"><i class="fa fa-usd"></i> </button>
             </div>
             </div>
         </div>

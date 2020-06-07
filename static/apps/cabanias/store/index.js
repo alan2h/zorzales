@@ -4,7 +4,8 @@ import * as getters from './getters'
 
 export const cabanias = {
     state: {
-        cabanias : []
+        cabanias : [],
+        inventarios: []
     },
     actions,
     mutations,
