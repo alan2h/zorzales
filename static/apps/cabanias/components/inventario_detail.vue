@@ -53,11 +53,8 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['set_inventarios_cabania'])
     },
     mounted(){
-        console.log(this.cabania_id, '=======');
-        this.set_inventarios_cabania(this.cabania_id)
     },
     filters: {
         
@@ -65,9 +62,7 @@ export default {
     computed: {
         ...mapGetters(['get_inventarios_cabania'])
     },
-    props: {
-        cabania_id: ''
-    },
-    watch: {}
+    watch: {
+    }
 }
 </script>

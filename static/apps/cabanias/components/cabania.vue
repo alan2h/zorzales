@@ -23,8 +23,9 @@
             </div>
         </template>
 
-       <reserva-detail v-if="cabania_open" :cabania="cabania_open"></reserva-detail>
-       <inventory-detail v-if="cabania_id_open" :cabania_id="cabania_id_open"></inventory-detail>
+       
+
+       <inventory-detail></inventory-detail>
 
     </div>
 </template>
@@ -32,24 +33,26 @@
 <script>
 
 import {mapActions, mapGetters} from 'vuex'
-import reservaDetail from '@/apps/reservas/components/detail.vue'
 import inventoryDetail from '@/apps/cabanias/components/inventario_detail.vue'
+
+
 
 export default {
     data(){
         return{
-            cabania_open: "",
-            cabania_id_open: ""
+            
         }
     },
     methods: {
-        ...mapActions(['set_reserva_unico']),
+        ...mapActions(['set_reserva_unico', 'set_inventarios_cabania']),
         abrirReserva(cabania){
+            console.log(cabania, '=============')
              /* Open detail of reserva */
-            this.cabania_open = cabania;
+            this.$emit('selected_reserva',cabania)
+            //this.$forceUpdate()
         },
         abrirInventario(cabania_id){
-            this.cabania_id_open = cabania_id;
+            this.set_inventarios_cabania(cabania_id);
         }
     },
     mounted(){
@@ -64,7 +67,6 @@ export default {
         }
     },
     components: {
-        reservaDetail,
         inventoryDetail
     }
 }
