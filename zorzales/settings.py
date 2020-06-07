@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     #complementos
     'apps.complementos.articulos.rubros',
     'apps.complementos.articulos.marcas',
+    'apps.complementos.tipos_pagos',
     #apps:
     'apps.personas',
     'apps.clientes',

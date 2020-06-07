@@ -46,6 +46,7 @@ class CabaniaViewSet(viewsets.ModelViewSet):
                                 'id':i,
                                 'reserva': True,
                                 'cabania': cabania.descripcion,
+                                'cabania_id': pk,
                                 'fecha_ingreso': reserva_result.fecha_ingreso,
                                 'hora_ingreso': reserva_result.hora_ingreso,
                                 'dia_actual': today,
@@ -57,6 +58,7 @@ class CabaniaViewSet(viewsets.ModelViewSet):
                             'id': i,
                             'reserva': False,
                             'cabania': cabania.descripcion,
+                            'cabania_id': pk,
                             'fecha_ingreso': '',
                             'hora_ingreso': '',
                             'dia_actual': today,
@@ -69,6 +71,7 @@ class CabaniaViewSet(viewsets.ModelViewSet):
                         'reserva': False,
                         'fecha_ingreso': '',
                         'cabania': cabania.descripcion,
+                        'cabania_id': pk,
                         'hora_ingreso': '',
                         'dia_actual': today,
                         'cliente': '',
@@ -80,11 +83,11 @@ class CabaniaViewSet(viewsets.ModelViewSet):
                         'id':i,
                         'reserva': True,
                         'cabania': cabania.descripcion,
+                        'cabania_id': pk,
                         'fecha_ingreso': reserva_result.fecha_ingreso,
                         'hora_ingreso': reserva_result.hora_ingreso,
                         'dia_actual': today,
                         'cliente': reserva_result.cliente.nombre + ' ' + reserva_result.cliente.apellido,
                         'fecha_salida': reserva_result.fecha_salida
                     })
-        print(result)
         return JsonResponse(result, safe=False)

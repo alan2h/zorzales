@@ -5,7 +5,7 @@
                 <h3>Ocupado</h3>
                 <h6>{{ cabania.cabania }}</h6>
                 <img src="/media/logos/cabania_ocupada.jpeg" width="240px" height="240px" alt="..." class="img-thumbnail">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#id_inventory_detail">
+                <button @click="abrirInventario(cabania.cabania_id)"  type="button" class="btn btn-success" data-toggle="modal" data-target="#id_inventory_detail">
                 <i class="fa fa-search">Inventario</i></button>
                 <!-- Button trigger modal -->
                 <button @click="abrirReserva(cabania)" type="button" class="btn btn-success" data-toggle="modal" data-target="#id_cliente_detail">
@@ -18,12 +18,13 @@
                 <h3>Disponible</h3>
                 <h6>{{ cabania.cabania }}</h6>
                 <img src="/media/logos/cabania_libre.jpeg" width="240px" height="240px" alt="..." class="img-thumbnail">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#id_inventory_detail">
+                <button @click="abrirInventario(cabania.cabania_id)" type="button" class="btn btn-success" data-toggle="modal" data-target="#id_inventory_detail">
                 <i class="fa fa-search">Inventario</i></button>
             </div>
         </template>
 
-       <reserva-detail v-if="cabania_open" :cabania="cabania_open"></reserva-detail>
+       
+
        <inventory-detail></inventory-detail>
 
     </div>
@@ -32,23 +33,31 @@
 <script>
 
 import {mapActions, mapGetters} from 'vuex'
-import reservaDetail from '@/apps/reservas/components/detail.vue'
 import inventoryDetail from '@/apps/cabanias/components/inventario_detail.vue'
+
+
 
 export default {
     data(){
         return{
-            cabania_open: ""
+            
         }
     },
     methods: {
-        ...mapActions(['set_reserva_unico']),
+        ...mapActions(['set_reserva_unico', 'set_inventarios_cabania']),
         abrirReserva(cabania){
+            console.log(cabania, '=============')
              /* Open detail of reserva */
-            this.cabania_open = cabania;
+            this.$emit('selected_reserva',cabania)
+            //this.$forceUpdate()
+        },
+        abrirInventario(cabania_id){
+            this.set_inventarios_cabania(cabania_id);
         }
     },
-    mounted(){},
+    mounted(){
+        console.log(this.cabania);
+    },
     props: {
         cabania: {
             required: true
@@ -58,7 +67,6 @@ export default {
         }
     },
     components: {
-        reservaDetail,
         inventoryDetail
     }
 }

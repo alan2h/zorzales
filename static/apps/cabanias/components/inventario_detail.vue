@@ -3,14 +3,17 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Cliente: </h5>
+                <h5 class="modal-title" id="exampleModalLabel">Inventario </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <img src="/media/logos/inventory_cabania.png" width="140px" height="140px" alt="..." class="img-thumbnail">
-                <table class="table">
+                <div v-if="get_inventarios_cabania.length == 0" class="alert alert-dark" role="alert">
+                        Esta cabaña no contiene un inventario registrado
+                </div>
+                <table v-if="get_inventarios_cabania.length > 0" class="table">
                 <thead>
                     <tr>
                     <th scope="col">#</th>
@@ -18,32 +21,48 @@
                     <th scope="col">Cantidad</th>
                     </tr>
                 </thead>
+                
                 <tbody>
-                    <tr>
-                        <th scope="row">ss</th>
-                        <th>ss</th>
-                        <td>ss</td>
-                    </tr>
+                     
+                    <template v-for="inventario in get_inventarios_cabania">
+                        <tr :key="inventario.id">
+                            <th scope="row">{{ inventario.id }}</th>
+                            <th>{{ inventario.articulo }}</th>
+                            <td>{{ inventario.cantidad }}</td>
+                        </tr>
+                    </template>
                 </tbody>
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Imprimir</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                <button type="button" class="btn btn-primary"><i class="fa fa-print"></i></button>
             </div>
             </div>
         </div>
     </div>
 </template>
 <script>
+
+import {mapActions, mapGetters} from 'vuex'
+
 export default {
     data(){
         return{
 
         }
     },
+    methods: {
+    },
+    mounted(){
+    },
     filters: {
         
+    },
+    computed: {
+        ...mapGetters(['get_inventarios_cabania'])
+    },
+    watch: {
     }
 }
 </script>
