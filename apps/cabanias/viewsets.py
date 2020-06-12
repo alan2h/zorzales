@@ -35,9 +35,9 @@ class CabaniaViewSet(viewsets.ModelViewSet):
         for cabania in cabanias:
             pk = cabania.id
             i += 1
-            reserva = Reserva.objects.filter(cabania__id=pk, fecha_ingreso=today)
+            reserva = Reserva.objects.filter(cabania__id=pk, fecha_ingreso=today, activo=True)
             if not reserva.exists():
-                reserva = Reserva.objects.filter(cabania__id=pk, fecha_ingreso__lt=today)
+                reserva = Reserva.objects.filter(cabania__id=pk, fecha_ingreso__lt=today, activo=True)
                 if reserva.exists():
                     for r in reserva:
                         if r.fecha_salida >= today:

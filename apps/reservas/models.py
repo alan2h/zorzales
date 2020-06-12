@@ -24,6 +24,8 @@ class Reserva(models.Model):
     
     observacion = models.TextField(max_length=300, null=True, blank=True)
 
+    activo = models.BooleanField(default=True)
+
     def __str__(self):
         return '%s - %s - %s' % (self.fecha_ingreso, self.cliente, self.cabania)
 

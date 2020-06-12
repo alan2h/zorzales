@@ -17,7 +17,7 @@ class ReservaViewSet(viewsets.ModelViewSet):
         la relacion entre cliente y alquiler
     '''
 
-    queryset = Reserva.objects.all()
+    queryset = Reserva.objects.filter(activo=True)
     serializer_class = ReservaSerializer
     pagination_class = StandardResultsSetPagination
 
@@ -62,12 +62,12 @@ class ReservaViewSet(viewsets.ModelViewSet):
 
 
     def get_queryset(self):
-        queryset = Reserva.objects.all()
+        queryset = Reserva.objects.filter(activo=True)
         if 'buscador' in self.request.query_params:
             if self.request.query_params.get('buscador') != '':
-                queryset = Reserva.objects.filter(cliente__nombre__icontains=self.request.query_params.get('buscador'))
+                queryset = Reserva.objects.filter(cliente__nombre__icontains=self.request.query_params.get('buscador'), activo=True)
                 if len(queryset) == 0:
-                    queryset = Reserva.objects.filter(cliente__apellido__icontains=self.request.query_params.get('buscador'))
+                    queryset = Reserva.objects.filter(cliente__apellido__icontains=self.request.query_params.get('buscador'), activo=True)
                     if len(queryset) == 0:
-                        queryset = Reserva.objects.all()
+                        queryset = Reserva.objects.filter(activo=True)
         return queryset

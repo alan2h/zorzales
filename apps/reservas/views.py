@@ -23,10 +23,13 @@ class CobranzaCreateView(SuccessMessageMixin, CreateView):
     success_message = 'Esta reserva se cobro con éxito'
 
     def post(self, request, *args, **kwargs):
-        print(self.request.POST)
         cobranza_form = CobranzaForm(data=self.request.POST)
         if cobranza_form.is_valid():
-            reserva = Reserva.objects.get(pk=kwargs['id'])
+            Reserva.objects.filter(cabania__id=kwargs['id']).update(
+                activo=False
+            )
+            reserva = Reserva.objects.filter(cabania__id=kwargs['id']).first()
+            
             tipo_pago = TipoPago.objects.get(pk=self.request.POST['tipo_pago'])
 
             Cobranza.objects.create(
