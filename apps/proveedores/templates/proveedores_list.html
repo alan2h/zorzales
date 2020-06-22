@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    
+
+    <div class="col-md-12">
+      <div class="x_panel">
+          
+          <!-- buscador de listado -->
+          <div class="title_right">
+            <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+              <form method="GET" >
+                <div class="input-group">
+                    <input name="search" type="text" class="form-control" placeholder="Buscar por ...">
+                    <span class="input-group-btn">
+                      <button type="submit" class="btn btn-default">Aceptar</button>
+                    </span>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- buscador de listado /articulos/imprimir/pdf/-->
+          
+           <div class="form-group">
+
+              <div class="col-md-3 col-sm-3  offset-md-3">
+                  <a  href="#" type="button" class="btn btn-secondary"><i class="fa fa-file"></i></a>
+                  <a   target="_blank" href="#" type="button" class="btn btn-secondary"><i class="fa fa-print"></i></a>
+              </div>
+            </div>
+
+        <div class="x_content">
+          <br />
+         
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Razón Social</th>
+                <th>Descripción</th>
+                <th>Referente</th>
+                <th>Contacto</th>
+                <th>Detalle</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              {% for proveedor in object_list %}
+
+              <tr>
+                <th scope="row">{{ proveedor.razon_social }}</th>
+                <td>{{ proveedor.descripcion }}</td>
+                <td>{{ proveedor.referente }}</td>
+                <td>{{ proveedor.contacto }}</td>
+                <td><a href="#" type="button" class="btn btn-info"><i class="fa fa-eye"></i></a></td>
+                <td><a href="#" type="button" class="btn btn-success"><i class="fa fa-pencil"></i></a></td>
+                <td><a href="#" type="button" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+              </tr>
+              {% empty %}
+               <div class="alert alert-error" role="alert">No existen registro cargados con esa busqueda</div>
+              {% endfor %}
+            </tbody>
+          </table>
+          
+        </div>
+      </div>
+    </div>
+
+
+   
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+{% endblock %}
