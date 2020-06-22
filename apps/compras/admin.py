@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Compra, CompraArticulo
+from .models import Compra, CompraArticulo, TipoComprobante
 
 class CompraAdmin(admin.ModelAdmin):
     
@@ -9,5 +9,6 @@ class CompraAdmin(admin.ModelAdmin):
         'precio_compra'
     ]
 
+admin.site.register(TipoComprobante)
 admin.site.register(CompraArticulo)
 admin.site.register(Compra, CompraAdmin)

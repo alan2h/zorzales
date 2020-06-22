@@ -8,6 +8,7 @@ module.exports = {
       pedidos: './static/apps/pedidos/index.js',
       reservas: './static/apps/reservas/index.js',
       cabanias: './static/apps/cabanias/index.js',
+      compras: './static/apps/compras/index.js',
     },
     // salidas de mis js
     output: {

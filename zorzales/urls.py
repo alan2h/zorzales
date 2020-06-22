@@ -51,6 +51,7 @@ urlpatterns = [
     path('pedidos/', include('apps.pedidos.urls')),
     path('reservas/', include('apps.reservas.urls')),
     path('cabanias/', include('apps.cabanias.urls')),
+    path('compras/', include('apps.compras.urls')),
     # complementos
     path('complementos/marcas/', include('apps.complementos.articulos.marcas.urls')),
     path('complementos/rubros/', include('apps.complementos.articulos.rubros.urls')),

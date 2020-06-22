@@ -10,9 +10,7 @@
                 observacion
         -->
          <div class="title_left">
-                <div class="col-md-10 col-sm-10 form-group row pull-left">
-                  <button @click="alta" class="btn btn-success" type="button">Realizar una reserva</button>
-                </div>
+              
          </div>
 
 
@@ -26,7 +24,15 @@
                     </span>
                   </div>
                 </div>
-                
+          </div>
+
+          <div class="form-group">
+
+              <div class="col-md-3 col-sm-3  offset-md-3">
+                 <button @click="alta" class="btn btn-dark" type="button"><i class="fa fa-file"></i></button>
+                 <button class="btn btn-dark" type="button"><i class="fa fa-print"></i></button>
+              </div>
+
           </div>
 
          <table class="table table-striped">

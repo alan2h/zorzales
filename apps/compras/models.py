@@ -18,10 +18,26 @@ class CompraArticulo(models.Model):
         verbose_name_plural = 'Compra-Articulos'
 
 
+class TipoComprobante(models.Model):
+
+    descripcion = models.CharField(max_length=300, null=False, blank=False)
+
+    class Meta:
+
+        verbose_name = 'Tipo de Comprobante'
+        verbose_name_plural = 'Tipos de comprobantes'
+
+    def __str__(self):
+        return self.descripcion
+
+
 class Compra(models.Model):
 
     pedido = models.ForeignKey(Pedido, null=True, blank=True, 
     on_delete=models.CASCADE)
+
+    numero_comprobante = models.CharField(max_length=300, null=True, blank=True)
+
     fecha = models.DateField(null=False, blank=False)
     precio_compra = models.DecimalField(decimal_places=2, max_digits=12, 
     null=True, blank=True)
