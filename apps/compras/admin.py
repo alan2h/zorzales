@@ -1,3 +1,13 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Compra, CompraArticulo
+
+class CompraAdmin(admin.ModelAdmin):
+    
+    list_display = [
+        'fecha',
+        'precio_compra'
+    ]
+
+admin.site.register(CompraArticulo)
+admin.site.register(Compra, CompraAdmin)
