@@ -6,7 +6,7 @@
                 <div class="col-md-5 col-sm-10 form-group row pull-right top_search">
              
                   <div class="input-group">
-                    <input v-model="texto_buscar" type="text" class="form-control" placeholder="Ingrese la busqueda ...">
+                    <input type="text" class="form-control" placeholder="Ingrese la busqueda ...">
                     <span class="input-group-btn">
                       <button class="btn btn-default" type="button">Aceptar</button>
                     </span>
@@ -56,6 +56,11 @@ export default {
         return{
 
         }
+    },
+    methods: {
+      alta(){
+        this.$router.push('/alta')
+      }
     }
 }
 </script>

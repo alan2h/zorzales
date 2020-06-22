@@ -35,8 +35,8 @@
                               <div class="ln_solid"></div>
                               <div class="item form-group">
                                   <div class="col-md-6 col-sm-6 offset-md-3">
-                                  <button class="btn btn-primary" type="button">Cancelar</button>
-                                  <button type="submit" class="btn btn-success">Guardar</button>
+                                  <button @click="cancelar" class="btn btn-secondary" type="button"><i class="fa fa-times"></i></button>
+                                  <button  type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i></button>
                                   </div>
                               </div>
                              <!-- botones -->
@@ -55,6 +55,11 @@ export default {
         return{
 
         }
+    },
+    methods: {
+      cancelar(){
+        this.$router.push('/')
+      }
     }
 }
 </script>

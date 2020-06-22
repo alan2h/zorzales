@@ -3,44 +3,35 @@
 {% block menu %}
 <ul class="nav side-menu">
 
-  <li><a><i class="fa fa-shopping-cart"></i> Artículos <span class="fa fa-chevron-down"></span></a>
+  <li><a><i class="fa fa-shopping-cart"></i> Stock <span class="fa fa-chevron-down"></span></a>
     <ul class="nav child_menu">
-       <li><a href="/articulos/alta">Cargar Artículos</a></li>
-          <li><a href="/articulos/listado">Listar Artículos</a>
-            <li><a>Complementos<span class="fa fa-chevron-down"></span></a>
-              <ul class="nav child_menu">
-                <li><a href="/complementos/marcas/alta">Cargar marcas</a>
-                </li>
-                <li ><a href="/complementos/marcas/listado">Listar marcas</a>
-                </li>
-                <li><a href="/complementos/rubros/alta">Cargar rubros</a>
-                </li>
-                <li ><a href="/complementos/rubros/listado">Listar rubros</a>
-                </li>
-              </ul>
-              
+      <li><a href="/articulos/listado">Artículos</a></li>
+        <li><a href="#">Proveedores</a></li>
+        <li><a href="/pedidos/listado">Pedidos</a></li>
+        <li><a href="/compras/base">Compras</a></li>
+        <li><a>Complementos<span class="fa fa-chevron-down"></span></a>
+        <ul class="nav child_menu">
+          <li><a href="/complementos/marcas/alta">Cargar marcas</a>
           </li>
-    </ul>
-  </li>   
-
-  <li><a><i class="fa fa-shopping-cart"></i> Compras <span class="fa fa-chevron-down"></span></a>
-    <ul class="nav child_menu">
-       <li><a href="/pedidos/alta">Cargar Pedido</a></li>
-       <li><a href="/pedidos/listado">Listar pedidos</a></li>
-       <li><a href="/compras/base">Cargar Compra</a></li>
+          <li ><a href="/complementos/marcas/listado">Listar marcas</a>
+          </li>
+          <li><a href="/complementos/rubros/alta">Cargar rubros</a>
+          </li>
+          <li ><a href="/complementos/rubros/listado">Listar rubros</a>
+          </li>
+        </ul>
     </ul>
   </li>   
 
     <li><a><i class="fa fa-user"></i> Clientes <span class="fa fa-chevron-down"></span></a>
       <ul class="nav child_menu">
-        <li><a href="/clientes/alta">Cargar Cliente</a></li>
-        <li><a href="/clientes/listado">Listar Clientes</a></li>
+        <li><a href="/clientes/listado">Clientes</a></li>
       </ul>
     </li>   
 
     <li><a><i class="fa fa-bed"></i> Alquileres <span class="fa fa-chevron-down"></span></a>
       <ul class="nav child_menu">
-        <li><a href="/reservas/listado">Listar Reservas</a></li>
+        <li><a href="/reservas/listado">Reservas</a></li>
          <li><a href="/cabanias/mapa">Ver mapa</a></li>
       </ul>
     </li> 
@@ -51,12 +42,6 @@
       </ul>
     </li> 
 
-    <li><a><i class="fa fa-user"></i> Proveedores <span class="fa fa-chevron-down"></span></a>
-      <ul class="nav child_menu">
-        <li><a href="#">Cargar Proveedor</a></li>
-        <li><a href="#">Listar Proveedores</a></li>
-      </ul>
-    </li>       
     <li><a><i class="fa fa-cart-plus"></i> Compras <span class="fa fa-chevron-down"></span></a>
       <ul class="nav child_menu">
         <li><a href="#">Cargar Compra</a></li>
