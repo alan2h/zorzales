@@ -52,6 +52,7 @@ urlpatterns = [
     path('reservas/', include('apps.reservas.urls')),
     path('cabanias/', include('apps.cabanias.urls')),
     path('compras/', include('apps.compras.urls')),
+    path('proveedores/', include('apps.proveedores.urls')),
     # complementos
     path('complementos/marcas/', include('apps.complementos.articulos.marcas.urls')),
     path('complementos/rubros/', include('apps.complementos.articulos.rubros.urls')),

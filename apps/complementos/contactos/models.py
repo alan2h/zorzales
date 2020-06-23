@@ -1,5 +1,7 @@
 from django.db import models
 
+from apps.personas.models import Persona
+
 class TipoContacto(models.Model):
 
     descripcion = models.CharField(max_length=300, blank=False, null=False)
