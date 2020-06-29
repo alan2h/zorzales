@@ -18,3 +18,4 @@ class ProveedorCreateView(SuccessMessageMixin, CreateView):
     model = Proveedor
     template_name = 'proveedor_form.html'
     form_class = ProveedorForm
+    success_url = '/proveedores/listado'

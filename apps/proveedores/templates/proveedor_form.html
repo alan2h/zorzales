@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extra_css %}
+<!-- select2 -->
+<link href="{% static '/assets/select2/dist/css/select2.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    
+
+    <div class="col-md-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Cargar un Proveedor </h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+              
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <br />
+          <form method="POST"  class="form-horizontal form-label-left">
+          {% csrf_token %}
+          
+
+             <!-- controles -->
+             <div class="form-group row ">
+                <label class="control-label col-md-3 col-sm-3 ">Razon Social</label>
+                <div class="col-md-9 col-sm-9 ">
+                    {{ form.razon_social }}
+                    <!-- error -->
+                        {% if form.razon_social.errors %}
+                          <div class="alert alert-danger" role="alert">
+                            <p>{{ form.razon_social.errors|striptags }}</p>
+                          </div>  
+                        {% endif %}
+                      <!-- error -->
+                </div>
+                </div>
+             <!-- controles -->
+
+              <!-- controles -->
+             <div class="form-group row ">
+                <label class="control-label col-md-3 col-sm-3 ">Cuit</label>
+                <div class="col-md-9 col-sm-9 ">
+                    {{ form.cuit }}
+                    <!-- error -->
+                        {% if form.cuit.errors %}
+                          <div class="alert alert-danger" role="alert">
+                            <p>{{ form.cuit.errors|striptags }}</p>
+                          </div>  
+                        {% endif %}
+                      <!-- error -->
+                </div>
+                </div>
+             <!-- controles -->
+
+            <!-- controles -->
+             <div class="form-group row ">
+                <label class="control-label col-md-3 col-sm-3 ">Descripción</label>
+                <div class="col-md-9 col-sm-9 ">
+                    {{ form.descripcion }}
+                    <!-- error -->
+                        {% if form.descripcion.errors %}
+                          <div class="alert alert-danger" role="alert">
+                            <p>{{ form.descripcion.errors|striptags }}</p>
+                          </div>  
+                        {% endif %}
+                      <!-- error -->
+                </div>
+                </div>
+             <!-- controles -->
+
+             <!-- controles -->
+             <div class="form-group row ">
+                <label class="control-label col-md-3 col-sm-3 ">Referente</label>
+                <div class="col-md-7 col-sm-7 ">
+                    {{ form.referente }}
+                    <!-- error -->
+                        {% if form.referente.errors %}
+                          <div class="alert alert-danger" role="alert">
+                            <p>{{ form.referente.errors|striptags }}</p>
+                          </div>  
+                        {% endif %}
+                      <!-- error -->
+                </div>
+                  <!-- controles adicionales  -->
+                    <div class="col-md-1 col-sm-1">
+                      <button type="button" onclick="abrirReferente()" class="btn btn-info"><i class="fa fa-plus"></i></button>
+                    </div>
+                  <!-- controles adicionales  -->
+                </div>
+             <!-- controles -->
+
+      
+         
+          
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-9 col-sm-9  offset-md-3">
+                <a  href="/proveedores/listado" type="button" class="btn btn-secondary"><i class="fa fa-times"></i></a>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i></button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+   
+  </div>
+
+
+<!-- modal de carga de referentes  -->
+<div class="modal fade" id="id_form_modal_referentes" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Referente</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+         <div class="form-group">
+          <label for="">Nombre</label>
+          <input type="text" class="form-control" name="nombre_referente" id="id_nombre_referente" aria-describedby="helpId" placeholder="">
+          <small id="helpId" class="form-text text-muted">Ingrese el nombre</small>
+            <!-- error  message -->
+              <div id="id_mensaje_error_nombre_referente" class="alert alert-danger" role="alert">
+                <p>Error de carga, verifique el nombre ingresado</p>
+              </div>  
+            <!-- error -->
+        </div>
+
+        <div class="form-group">
+          <label for="">Apellido</label>
+          <input type="text" class="form-control" name="apellido_referente" id="id_apellido_referente" aria-describedby="helpId" placeholder="">
+          <small id="helpId" class="form-text text-muted">Ingrese el apellido</small>
+            <!-- error  message -->
+              <div id="id_mensaje_error_apellido_referente" class="alert alert-danger" role="alert">
+                <p>Error de carga, verifique el apellido ingresado</p>
+              </div>  
+            <!-- error -->
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i></button>
+        <button onclick="" type="button" class="btn btn-primary"><i class="fa fa-floppy-o"></i></button>
+      </div>
+    </div>
+  </div>
+</div>  
+  <!-- modal de carga de sectores  -->
+
+
+{% endblock %}
+
+{% block extra_js %}
+<!-- select2 -->
+<script src="{% static '/assets/select2/dist/js/select2.min.js' %}"></script>
+
+<script>
+
+  $('#id_mensaje_error_nombre_referente').hide();
+  $('#id_mensaje_error_apellido_referente').hide();
+  /*---------------------------------------*/
+  /*------------SELECT 2 ------------------*/
+    $('#id_referente').select2();
+  /*---------------------------------------*/
+  /*---------------------------------------*/
+
+  /*-------- complementos de referentes ---*/
+
+   function abrirReferente(){
+      $('#id_form_modal_referentes').modal('show');
+    }
+
+  /*--------------------------------------*/
+</script>
+{% endblock %}

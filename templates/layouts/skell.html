@@ -32,7 +32,10 @@
  
     <!-- Custom Theme Style -->
     <link href="{% static '/assets/build/css/custom.min.css' %}" rel="stylesheet">
-    
+
+    {% block extra_css %} {% endblock %}
+
+
   </head>
 
   <body class="nav-md">

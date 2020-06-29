@@ -1,6 +1,8 @@
 from django import forms
 
 from .models import Proveedor
+from apps.personas.models import Persona
+from apps.complementos.contactos.models import Contacto
 
 
 class ProveedorForm(forms.ModelForm):
@@ -25,6 +27,23 @@ class ProveedorForm(forms.ModelForm):
         attrs={'class': 'form-control'}
     ))
 
+    referente = forms.ModelChoiceField(required=False, queryset=Persona.objects.all(), 
+    widget=forms.Select(
+        attrs={'class': 'form-control'}
+    ))
+
+    contacto = forms.ModelMultipleChoiceField(required=False, queryset=Contacto.objects.all(),
+    widget=forms.Select(
+        attrs={'class': 'form-control'}
+    ))
+
+
     class Meta:
         model = Proveedor
-        fields = ['razon_social', 'cuit', 'descripcion']
+        fields = [
+            'razon_social', 
+            'cuit', 
+            'descripcion', 
+            'referente',
+            'contacto'
+            ]
