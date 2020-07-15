@@ -36,7 +36,7 @@
                     <div id="wizard" class="form_wizard wizard_horizontal">
                       <ul class="wizard_steps">
                         <li>
-                          <a href="#step-1">
+                          <a href="#">
                             <span class="step_no">1</span>
                             <span class="step_descr">
                                               Datos personales<br />
@@ -45,7 +45,7 @@
                           </a>
                         </li>
                         <li>
-                          <a href="#step-2">
+                          <a {% if form.instance.pk  %} onclick="abrirContacto()" {% endif %} href="">
                             <span class="step_no">2</span>
                             <span class="step_descr">
                                               Guardar Contacto<br />
@@ -128,10 +128,7 @@
                                       </div>
                                     <!-- controles adicionales  -->
                                   </div>
-                              <!-- controles -->
-
-                        
-                          
+                              <!-- controles -->                    
                             
                               <div class="ln_solid"></div>
                               <div class="form-group">
@@ -142,6 +139,7 @@
                               </div>
 
                             </form>
+
                       </div>
                       <div id="step-2">
                      
@@ -229,5 +227,9 @@
     }
 
   /*--------------------------------------*/
+
+  function abrirContacto(){
+    window.location.href="/proveedores/contactos/{{ form.instance.pk  }}"
+  }
 </script>
 {% endblock %}

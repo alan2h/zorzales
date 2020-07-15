@@ -39,7 +39,6 @@
                 <th>Razón Social</th>
                 <th>Descripción</th>
                 <th>Referente</th>
-                <th>Contacto</th>
                 <th>Detalle</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
@@ -53,8 +52,7 @@
                 <th scope="row">{{ proveedor.razon_social }}</th>
                 <td>{{ proveedor.descripcion }}</td>
                 <td>{{ proveedor.referente }}</td>
-                <td>{{ proveedor.contacto }}</td>
-                <td><a href="#" type="button" class="btn btn-info"><i class="fa fa-eye"></i></a></td>
+                <td><a href="/proveedores/detalle/{{ proveedor.id }}" type="button" class="btn btn-info"><i class="fa fa-eye"></i></a></td>
                 <td><a href="/proveedores/editar/{{ proveedor.id }}" type="button" class="btn btn-success"><i class="fa fa-pencil"></i></a></td>
                 <td><a href="#" type="button" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
               </tr>
@@ -67,8 +65,6 @@
         </div>
       </div>
     </div>
-
-
    
   </div>
 {% endblock %}
