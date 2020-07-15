@@ -27,6 +27,11 @@
                         <!-- /.col -->
                         <div class="col-md-6">
                           <p class="lead">{{ object }} - {{ object.descripcion }}</p>
+                          {% if object.imagen %}
+                            <img width="340px" heigth="340px" src="/media/{{ object.imagen }}" />
+                          {% else %}
+                            <img width="340px" heigth="340px" src="/media/logos/no_photo.png" />
+                          {% endif %}
                           <div class="table-responsive">
                             <table class="table">
                               <tbody>

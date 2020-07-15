@@ -36,6 +36,7 @@
           <table class="table">
             <thead>
               <tr>
+                <th>Imagen</th>
                 <th>Sector</th>
                 <th>descripcion</th>
                 <th>Referencia</th>
@@ -54,6 +55,14 @@
               {% for articulo in object_list %}
 
               <tr>
+
+                <td>
+                  {% if articulo.imagen %}
+                    <img width="40px" heigth="40px" src="/media/{{ articulo.imagen }}" />
+                  {% else %}
+                    <img width="40px" heigth="40px" src="/media/logos/no_photo.png" />
+                  {% endif %}
+                </td>
                 <th scope="row">{% if articulo.sector %}{{ articulo.sector }}{% else %}--{% endif %}</th>
                 <td>{{ articulo.descripcion }}</td>
                 <td>{% if articulo.referencia %}{{ articulo.referencia }}{% else %}--{% endif %}</td>

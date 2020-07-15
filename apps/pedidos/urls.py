@@ -13,8 +13,8 @@ router.register(r'articulos/api', viewsets.PedidoArticuloViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('alta', PedidoCreateView.as_view(), name='PedidoCreateView'),
-    path('listado', PedidoListView.as_view(), name='PedidoListView'),
+    path('alta/', PedidoCreateView.as_view(), name='PedidoCreateView'),
+    path('listado/', PedidoListView.as_view(), name='PedidoListView'),
     path('articulos/listado', helpers.articulo_list, name='articulo_list'),
     path('articulos/obtener', helpers.get_articulo, name='get_articulo'),
 ]
