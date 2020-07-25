@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 // store
-import {store} from './store'
+import pedidos from './store'
 
 //components
 import content_pedidos from './components/content.vue'
@@ -12,9 +12,14 @@ import content_pedidos from './components/content.vue'
 Vue.use(Vuex);
 Vue.use(BootstrapVue);
 
+const storer = new Vuex.Store({
+  modules: {pedidos}
+})
+
+
 new Vue({
     el: '#app',
-    store: store,
+    store: storer,
     render(h) { 
       return h(content_pedidos) 
     }

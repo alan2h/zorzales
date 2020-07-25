@@ -8,7 +8,7 @@ import * as getters from './getters'
 
 Vue.use(Vuex);
 
-export const store = new Vuex.Store({
+const pedidos = {
     state: {
         articulos_pedidos: [],
         articulos: [],
@@ -21,4 +21,6 @@ export const store = new Vuex.Store({
     actions,
     mutations,
     getters
-})
+}
+
+export default pedidos;

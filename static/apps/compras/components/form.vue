@@ -22,11 +22,12 @@
                             
                             <!-- controles -->
                               <div class="item form-group">
-                                  <label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre <span class="required">*</span>
+                                  <label class="col-form-label col-md-3 col-sm-3 label-align" >Pedido <span class="required">*</span>
                                   </label>
                                   <div class="col-md-6 col-sm-6 ">
-                                    
-                                   
+                                     <select class="form-control">
+                                        <option value="">--</option>
+                                     </select>
                                   </div>
                               </div>
                             <!-- controles -->
@@ -50,6 +51,9 @@
 </template>
 
 <script>
+
+import {mapGetters, mapActions} from 'vuex';
+
 export default {
     data(){
         return{
