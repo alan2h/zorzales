@@ -20,6 +20,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from rest_framework import permissions
+from rest_framework.authtoken.views import obtain_auth_token  # <-- Here
+
+
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
@@ -44,7 +47,8 @@ urlpatterns = [
     path('salir', views.salir, name='logout'),
     path('redoc', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
-
+    path('api-token-auth/', obtain_auth_token, name='api_token_auth'),  # <-- token login 
+ 
     path('inicio', views.Dashboard.as_view(), name='dashboard'),
     path('clientes/', include('apps.clientes.urls')),
     path('articulos/', include('apps.articulos.urls')),

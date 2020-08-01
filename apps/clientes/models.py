@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 from apps.personas.models import Persona
 
@@ -13,6 +14,8 @@ class Cliente(Persona):
     fecha_baja = models.DateField(blank=True, null=True)
     motivo = models.CharField(max_length=600, blank=True, null=True)
     observacion = models.TextField(max_length=300, blank=True, null=True)
+    # para el e-commerce
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
 
     # para realizar bajas
 
