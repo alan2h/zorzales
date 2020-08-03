@@ -16,6 +16,7 @@ class Cliente(Persona):
     observacion = models.TextField(max_length=300, blank=True, null=True)
     # para el e-commerce
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    confirmacion_correo = models.BooleanField(default=False)
 
     # para realizar bajas
 
