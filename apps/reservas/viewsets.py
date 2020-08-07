@@ -1,5 +1,7 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
+from rest_framework.decorators import action
+
 
 from .serializers import ReservaSerializer
 from .models import Reserva
@@ -55,6 +57,44 @@ class ReservaViewSet(viewsets.ModelViewSet):
                 fecha_ingreso=request.data.get('fecha_ingreso'),
                 hora_ingreso=request.data.get('hora_ingreso').split('T')[1],
                 fecha_salida=request.data.get('fecha_salida')
+            )
+            return Response({'ok': '200'}, status=status.HTTP_201_CREATED)
+        else:
+            return Response(errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+    @action(detail=True, methods=['post'])
+    def set_reserva_web(self, request, pk=None):
+        '''
+        {'fecha_ingreso': '2020-08-04T03:00:00.000Z', 
+        'fecha_salida': '2020-08-27T03:00:00.000Z', 
+        'hora_ingreso': '', 
+        'cabania': '3', 
+        'username': 'admin'}
+        '''
+        errors = []
+        print(request.data)
+        if request.data.get('cabania') == '':
+            errors.append('cabania')
+
+        if request.data.get('fecha_ingreso') == None:
+            errors.append('fecha_ingreso')
+
+        if request.data.get('fecha_salida') == None:
+            errors.append('fecha_salida')
+
+        if len(errors) == 0:
+            cabania = Cabania.objects.get(pk=request.data.get('cabania'))
+
+            cliente = Cliente.objects.filter(user__username=request.data.get('username')).first()
+            print(cliente)
+
+            reserva = Reserva.objects.create(
+                cabania=cabania,
+                cliente=cliente,
+                fecha_ingreso=request.data.get('fecha_ingreso').split('T')[0],
+                hora_ingreso=request.data.get('fecha_ingreso').split('T')[1],
+                fecha_salida=request.data.get('fecha_salida').split('T')[0]
             )
             return Response({'ok': '200'}, status=status.HTTP_201_CREATED)
         else:
