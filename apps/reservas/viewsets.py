@@ -73,7 +73,7 @@ class ReservaViewSet(viewsets.ModelViewSet):
         'username': 'admin'}
         '''
         errors = []
-        print(request.data)
+
         if request.data.get('cabania') == '':
             errors.append('cabania')
 
@@ -87,7 +87,26 @@ class ReservaViewSet(viewsets.ModelViewSet):
             cabania = Cabania.objects.get(pk=request.data.get('cabania'))
 
             cliente = Cliente.objects.filter(user__username=request.data.get('username')).first()
-            print(cliente)
+
+            reserva_filter = Reserva.objects.filter(
+                fecha_ingreso__range=[request.data.get('fecha_ingreso').split('T')[0], request.data.get('fecha_salida').split('T')[0]],
+                cabania__id=request.data.get('cabania')
+            )
+
+            print(reserva_filter)
+            print(reserva_filter.query)
+
+            if reserva_filter.exists():
+                errors.append('reserva_repetida')
+                return Response(errors, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                reserva_filter = Reserva.objects.filter(
+                    fecha_salida__range=[request.data.get('fecha_ingreso').split('T')[0], request.data.get('fecha_salida').split('T')[0]],
+                    cabania__id=request.data.get('cabania')
+                )
+                if reserva_filter.exists():
+                    errors.append('reserva_repetida')
+                    return Response(errors, status=status.HTTP_400_BAD_REQUEST)
 
             reserva = Reserva.objects.create(
                 cabania=cabania,
@@ -99,6 +118,8 @@ class ReservaViewSet(viewsets.ModelViewSet):
             return Response({'ok': '200'}, status=status.HTTP_201_CREATED)
         else:
             return Response(errors, status=status.HTTP_400_BAD_REQUEST)
+
+        
 
 
     def get_queryset(self):
