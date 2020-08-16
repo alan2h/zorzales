@@ -1,7 +1,8 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
-
+from rest_framework.views import APIView
+import datetime
 
 from .serializers import ReservaSerializer
 from .models import Reserva
@@ -62,6 +63,21 @@ class ReservaViewSet(viewsets.ModelViewSet):
         else:
             return Response(errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @action(detail=False, methods=['get'])
+    def get_reserva_cabania(self, request, pk=None):
+        """
+        Return a list of bookings
+        """
+        print(self.request.query_params)
+        response = {'fecha_ingreso': '', 'fecha_salida': ''}
+        booking = Reserva.objects.filter(cabania__id=self.request.query_params.get('cabania'), fecha_ingreso__gte=datetime.datetime.now()).order_by('-id')
+        if booking.exists():
+            response = {
+                'fecha_ingreso': booking[0].fecha_ingreso,
+                'fecha_salida': booking[0].fecha_salida
+            }
+        return Response(response)
+
 
     @action(detail=True, methods=['post'])
     def set_reserva_web(self, request, pk=None):
@@ -92,9 +108,6 @@ class ReservaViewSet(viewsets.ModelViewSet):
                 fecha_ingreso__range=[request.data.get('fecha_ingreso').split('T')[0], request.data.get('fecha_salida').split('T')[0]],
                 cabania__id=request.data.get('cabania')
             )
-
-            print(reserva_filter)
-            print(reserva_filter.query)
 
             if reserva_filter.exists():
                 errors.append('reserva_repetida')
